@@ -1,0 +1,18 @@
+version: "3.9"
+services:
+  wildfly:
+    build: .
+    ports:
+      - "8080:8080"
+      - "9990:9990"
+    volumes:
+      - ./deployments/:/opt/jboss/wildfly/standalone/deployments/
+  db:
+    image: postgres
+    restart: always
+    ports:
+      - "5432:5432"
+    environment:
+      POSTGRES_USER: admin
+      POSTGRES_PASSWORD: admin
+      POSTGRES_DB: database1

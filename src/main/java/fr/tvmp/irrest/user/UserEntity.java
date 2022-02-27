@@ -1,0 +1,35 @@
+package fr.tvmp.irrest.user;
+
+import fr.tvmp.irrest.common.Adresse;
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.NoArgsConstructor;
+
+import javax.json.bind.annotation.JsonbPropertyOrder;
+import javax.json.bind.annotation.JsonbTransient;
+import javax.json.bind.config.PropertyOrderStrategy;
+import javax.persistence.*;
+import java.io.Serializable;
+import java.util.UUID;
+
+
+@Entity
+@Data
+@AllArgsConstructor
+@NoArgsConstructor
+@JsonbPropertyOrder(PropertyOrderStrategy.LEXICOGRAPHICAL)
+@Table(name = "utilisateurs")
+public class UserEntity implements Serializable {
+    @Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
+    private UUID id;
+
+    private String prenom;
+    private String nom;
+
+    @JsonbTransient
+    private String password;
+
+    @Embedded
+    private Adresse adresse;
+}

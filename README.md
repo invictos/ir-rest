@@ -3,13 +3,20 @@
   
 
 ## Lancement
-### lancement du serveur
+### Création de l'image serveur
 ```
-docker build --tag=ir-test .
-docker run -p 8080:8080 -p 9990:9990 -it ir-test
+sudo docker-compose up
 ```
-### url
-http://127.0.0.1:8080/ir-rest-1.0-SNAPSHOT/api/hello-world
+
+### Accès
+
+| Nom      | URL                                         |
+|----------|---------------------------------------------|
+| root     | http://127.0.0.1:8080/ir-rest-1.0-SNAPSHOT  |
+| admin    | http://127.0.0.1:9990/                      |
+| database | postgres://database1:5432     (admin:admin) |
+
 
 ## Documentation
 - [Tutoriel youtube JAX-RS & Java EE](https://www.youtube.com/watch?v=DRxeW8R7VuE&list=PLzzeuFUy_CniPG4Nj_4_lbfaejM2_ScCe&index=18) 
+- [JSONB Annotations](https://javaee.github.io/jsonb-spec/users-guide.html)
