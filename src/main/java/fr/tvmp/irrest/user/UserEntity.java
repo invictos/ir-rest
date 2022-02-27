@@ -9,6 +9,7 @@ import javax.json.bind.annotation.JsonbPropertyOrder;
 import javax.json.bind.annotation.JsonbTransient;
 import javax.json.bind.config.PropertyOrderStrategy;
 import javax.persistence.*;
+import javax.validation.constraints.NotNull;
 import java.io.Serializable;
 import java.util.UUID;
 
@@ -24,12 +25,12 @@ public class UserEntity implements Serializable {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private UUID id;
 
-    private String prenom;
-    private String nom;
+    @NotNull private String prenom;
+    @NotNull private String nom;
 
     @JsonbTransient
-    private String password;
+    @NotNull private String password;
 
     @Embedded
-    private Adresse adresse;
+    @NotNull private Adresse adresse;
 }

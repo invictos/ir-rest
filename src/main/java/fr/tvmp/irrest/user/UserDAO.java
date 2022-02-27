@@ -22,10 +22,11 @@ public class UserDAO {
     }
 
     @Transactional
-    public void addUser(@NotNull UserEntity user){
+    public UserEntity addUser(@NotNull UserEntity user) {
         logger.info("Adding: " + user);
         em.getTransaction().begin();
         em.persist(user);
         em.getTransaction().commit();
+        return user;
     }
 }

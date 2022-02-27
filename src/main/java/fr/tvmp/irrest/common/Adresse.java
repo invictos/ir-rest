@@ -6,12 +6,13 @@ import lombok.Data;
 import lombok.RequiredArgsConstructor;
 
 import javax.persistence.Embeddable;
+import javax.validation.constraints.NotNull;
 
 @Data
 @RequiredArgsConstructor
 @AllArgsConstructor
 @Embeddable
 public class Adresse {
-    private String rue;
-    private String ville;
+    @NotNull private String rue;
+    @NotNull private String ville;
 }
