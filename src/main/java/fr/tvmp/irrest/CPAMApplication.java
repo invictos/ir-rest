@@ -13,7 +13,7 @@ import java.util.logging.Logger;
 @ApplicationPath("/api")
 public class CPAMApplication extends Application {
 
-    static private final String PERSISTANCE_UNIT_NAME = "prodPU"; // prodPU si postgresql
+    static private final String PERSISTANCE_UNIT_NAME = "prodPU"; // prodPU si postgresql, devPU si h2
     static private EntityManager em;
 
     @Produces
