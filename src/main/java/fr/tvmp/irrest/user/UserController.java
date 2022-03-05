@@ -2,6 +2,7 @@ package fr.tvmp.irrest.user;
 
 
 import fr.tvmp.irrest.common.Adresse;
+import fr.tvmp.irrest.stub.UserForm;
 
 import javax.inject.Inject;
 import javax.validation.Valid;
