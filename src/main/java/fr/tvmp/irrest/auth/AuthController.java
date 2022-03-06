@@ -4,22 +4,30 @@ import fr.tvmp.irrest.stub.Credentials;
 
 import javax.inject.Inject;
 import javax.validation.Valid;
-import javax.ws.rs.Consumes;
-import javax.ws.rs.NotFoundException;
-import javax.ws.rs.POST;
-import javax.ws.rs.Path;
+import javax.ws.rs.*;
 import javax.ws.rs.core.MediaType;
+import javax.ws.rs.core.Response;
+import java.util.logging.Logger;
 
 @Path("auth")
+@Produces(MediaType.APPLICATION_JSON)
 public class AuthController {
 
     @Inject
     AuthService authService;
 
+    @Inject
+    Logger logger;
+
     @POST
     @Consumes(MediaType.APPLICATION_JSON)
-    public String getAuthToken(@Valid Credentials credentials){
-        return authService.auth(credentials)
-                .orElseThrow(() -> new NotFoundException("Bad credentials"));
+    public Response getAuthToken(@Valid Credentials credentials){
+        var token = authService.auth(credentials);
+
+        if(token.isEmpty()){
+            return Response.status(Response.Status.UNAUTHORIZED).build();
+        }
+
+        return Response.ok(token.get()).build();
     }
 }

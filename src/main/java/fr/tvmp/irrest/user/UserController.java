@@ -1,6 +1,7 @@
 package fr.tvmp.irrest.user;
 
 
+import fr.tvmp.irrest.auth.roles.Secured;
 import fr.tvmp.irrest.common.Adresse;
 import fr.tvmp.irrest.stub.UserForm;
 
@@ -33,8 +34,8 @@ public class UserController {
 
     @GET
     @Path("{id}/prenom")
+    @Secured({UtilisateurRole.PATIENT})
     public Response getPrenomByUUID(@PathParam("id") UUID id) {
-
         UserEntity user = userService.getUserByUUID(id).orElseThrow(NotFoundException::new);
 
         return Response.ok(user.getPrenom()).build();

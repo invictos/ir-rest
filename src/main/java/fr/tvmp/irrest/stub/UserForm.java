@@ -3,13 +3,14 @@ package fr.tvmp.irrest.stub;
 import fr.tvmp.irrest.common.Adresse;
 import fr.tvmp.irrest.common.ToEntity;
 import fr.tvmp.irrest.user.UserEntity;
+import lombok.AllArgsConstructor;
 import lombok.Data;
 
 import javax.persistence.Embedded;
 import javax.validation.constraints.NotNull;
-import java.util.UUID;
 
 @Data
+@AllArgsConstructor
 public class UserForm implements ToEntity<UserEntity> {
     @NotNull private String prenom;
     @NotNull private String nom;
