@@ -1,10 +1,10 @@
 package fr.tvmp.irrest.user;
 
-import fr.tvmp.irrest.stub.Credentials;
 import lombok.NonNull;
 
 import javax.inject.Inject;
 import javax.validation.constraints.NotNull;
+import java.util.List;
 import java.util.Objects;
 import java.util.Optional;
 import java.util.UUID;
@@ -16,6 +16,10 @@ public class UserService {
 
     @Inject
     Logger logger;
+
+    public List<UserEntity> getAllUsers(){
+        return userDAO.getAll();
+    }
 
     public Optional<UserEntity> getUserByUUID(@NonNull UUID id){
         return Optional.ofNullable(userDAO.getUserByUUID(id));
@@ -32,15 +36,8 @@ public class UserService {
         return Objects.equals(user.getPassword(), hashedPassword);
     }
 
-    public UtilisateurRole getUserRole(@NonNull UserEntity user){
-        //TODO: Systeme de role: on utilise actuellement la 1e lettre de chaque prénom ...
-        //Rendre User avec une méthode abstraite "getRole"
-        switch(user.getPrenom().charAt(0)){
-            case 'p': return UtilisateurRole.PATIENT;
-            case 'm': return UtilisateurRole.MEDECIN;
-            case 'a': return UtilisateurRole.ADMINISTRATIF;
-        }
-        return UtilisateurRole.PATIENT;
+    public UserRole getUserRole(@NonNull UserEntity user){
+        return user.getRole();
     }
 
     private static String hashPassword(@NotNull String password){

@@ -1,6 +1,6 @@
 package fr.tvmp.irrest.auth.roles;
 
-import fr.tvmp.irrest.user.UtilisateurRole;
+import fr.tvmp.irrest.user.UserRole;
 
 import javax.ws.rs.NameBinding;
 import java.lang.annotation.Retention;
@@ -14,5 +14,5 @@ import static java.lang.annotation.RetentionPolicy.RUNTIME;
 @Retention(RUNTIME)
 @Target({TYPE, METHOD})
 public @interface Secured {
-    UtilisateurRole[] value() default {};
+    UserRole[] value() default {};
 }

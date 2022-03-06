@@ -27,3 +27,7 @@ static private final String PERSISTANCE_UNIT_NAME = "devPU";
 ## Documentation
 - [Tutoriel youtube JAX-RS & Java EE](https://www.youtube.com/watch?v=DRxeW8R7VuE&list=PLzzeuFUy_CniPG4Nj_4_lbfaejM2_ScCe&index=18) 
 - [JSONB Annotations](https://javaee.github.io/jsonb-spec/users-guide.html)
+
+## TODO
+- [ ] NotNull ou NonNull ?
+- [ ] Secured per user

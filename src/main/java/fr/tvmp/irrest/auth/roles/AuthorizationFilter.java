@@ -3,7 +3,7 @@ package fr.tvmp.irrest.auth.roles;
 import fr.tvmp.irrest.CPAMException;
 import fr.tvmp.irrest.user.UserEntity;
 import fr.tvmp.irrest.user.UserService;
-import fr.tvmp.irrest.user.UtilisateurRole;
+import fr.tvmp.irrest.user.UserRole;
 
 import javax.annotation.Priority;
 import javax.inject.Inject;
@@ -47,12 +47,12 @@ public class AuthorizationFilter implements ContainerRequestFilter {
         // Get the resource class which matches with the requested URL
         // Extract the roles declared by it
         Class<?> resourceClass = resourceInfo.getResourceClass();
-        List<UtilisateurRole> classRoles = extractRoles(resourceClass);
+        List<UserRole> classRoles = extractRoles(resourceClass);
 
         // Get the resource method which matches with the requested URL
         // Extract the roles declared by it
         Method resourceMethod = resourceInfo.getResourceMethod();
-        List<UtilisateurRole> methodRoles = extractRoles(resourceMethod);
+        List<UserRole> methodRoles = extractRoles(resourceMethod);
 
         try {
 
@@ -71,21 +71,21 @@ public class AuthorizationFilter implements ContainerRequestFilter {
     }
 
     // Extract the roles from the annotated element
-    private List<UtilisateurRole> extractRoles(AnnotatedElement annotatedElement) {
+    private List<UserRole> extractRoles(AnnotatedElement annotatedElement) {
         if (annotatedElement == null) {
-            return new ArrayList<UtilisateurRole>();
+            return new ArrayList<UserRole>();
         } else {
             Secured secured = annotatedElement.getAnnotation(Secured.class);
             if (secured == null) {
-                return new ArrayList<UtilisateurRole>();
+                return new ArrayList<UserRole>();
             } else {
-                UtilisateurRole[] allowedRoles = secured.value();
+                UserRole[] allowedRoles = secured.value();
                 return Arrays.asList(allowedRoles);
             }
         }
     }
 
-    private void checkPermissions(List<UtilisateurRole> allowedRoles) throws Exception {
+    private void checkPermissions(List<UserRole> allowedRoles) throws Exception {
         // Check if the user contains one of the allowed roles
         // Throw an Exception if the user has not permission to execute the method
         String uuid = securityContext.getUserPrincipal().getName();

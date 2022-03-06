@@ -3,7 +3,9 @@ package fr.tvmp.irrest.user;
 
 import fr.tvmp.irrest.auth.roles.Secured;
 import fr.tvmp.irrest.common.Adresse;
-import fr.tvmp.irrest.stub.UserForm;
+import fr.tvmp.irrest.stub.PatientForm;
+import fr.tvmp.irrest.user.patient.PatientEntity;
+import lombok.Data;
 
 import javax.inject.Inject;
 import javax.validation.Valid;
@@ -11,8 +13,10 @@ import javax.ws.rs.*;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 
+import java.util.List;
 import java.util.UUID;
 import java.util.logging.Logger;
+import java.util.stream.Collectors;
 
 @Path("user")
 @Produces(MediaType.APPLICATION_JSON)
@@ -25,42 +29,22 @@ public class UserController {
     UserService userService;
 
     @GET
+    @Path("all")
+    public Response getAllUsers(){
+        return Response.ok(
+                userService.getAllUsers().stream()
+                        .map(UserEntity::toUserSmall)
+                        .collect(Collectors.toList())
+        ).build();
+    }
+
+    @GET
     @Path("{id}")
+    @Secured({UserRole.ADMINISTRATIF})
     public Response getByUUID(@PathParam("id") UUID id) {
         UserEntity user = userService.getUserByUUID(id).orElseThrow(NotFoundException::new);
 
         return Response.ok(user).build();
-    }
-
-    @GET
-    @Path("{id}/prenom")
-    @Secured({UtilisateurRole.PATIENT})
-    public Response getPrenomByUUID(@PathParam("id") UUID id) {
-        UserEntity user = userService.getUserByUUID(id).orElseThrow(NotFoundException::new);
-
-        return Response.ok(user.getPrenom()).build();
-    }
-
-    @GET
-    @Path("random")
-    public UserEntity addRandom(){
-        UserEntity user = new UserEntity(
-                null,
-                "jean",
-                "de la fontaine",
-                "1234",
-                new Adresse("rue du chateau", "paris")
-        );
-
-        userService.addUser(user);
-
-        return user;
-    }
-
-    @POST
-    @Consumes(MediaType.APPLICATION_JSON)
-    public Response add(@Valid UserForm user){
-        return Response.ok(userService.addUser(user.toEntity())).build();
     }
 
     @GET

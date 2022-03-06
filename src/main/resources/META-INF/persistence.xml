@@ -8,6 +8,7 @@
 
 
         <class>fr.tvmp.irrest.user.UserEntity</class>
+        <class>fr.tvmp.irrest.user.patient.PatientEntity</class>
 
 
         <properties>
@@ -26,6 +27,7 @@
 
 
         <class>fr.tvmp.irrest.user.UserEntity</class>
+        <class>fr.tvmp.irrest.user.patient.PatientEntity</class>
 
 
         <properties>

@@ -1,6 +1,6 @@
 package fr.tvmp.irrest.user;
 
-public enum UtilisateurRole {
+public enum UserRole {
     PATIENT,
     MEDECIN,
     ADMINISTRATIF
