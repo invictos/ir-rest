@@ -2,6 +2,9 @@ package fr.tvmp.irrest.auth.roles;
 
 import fr.tvmp.irrest.CPAMException;
 import fr.tvmp.irrest.auth.AuthService;
+import fr.tvmp.irrest.auth.Token;
+import fr.tvmp.irrest.user.UserEntity;
+import fr.tvmp.irrest.user.UserService;
 
 import javax.annotation.Priority;
 import javax.inject.Inject;
@@ -28,6 +31,9 @@ public class AuthenticationFilter implements ContainerRequestFilter {
     AuthService authService;
 
     @Inject
+    UserService userService;
+
+    @Inject
     Logger logger;
 
     @Override
@@ -44,37 +50,18 @@ public class AuthenticationFilter implements ContainerRequestFilter {
         }
 
         // Extract the token from the Authorization header
-        String token = authorizationHeader
-                .substring(AUTHENTICATION_SCHEME.length()).trim();
+        String token_str = authorizationHeader
+                .substring(AUTHENTICATION_SCHEME.length())
+                .trim();
+
+        Token token = new Token(token_str);
 
         try {
 
             // Validate the token
             validateToken(token);
 
-            final SecurityContext currentSecurityContext = requestContext.getSecurityContext();
-            requestContext.setSecurityContext(new SecurityContext() {
-
-                @Override
-                public Principal getUserPrincipal() {
-                    return () -> String.valueOf(authService.isTokenValidUser(token).orElseThrow(Error::new));
-                }
-
-                @Override
-                public boolean isUserInRole(String role) {
-                    return true;
-                }
-
-                @Override
-                public boolean isSecure() {
-                    return currentSecurityContext.isSecure();
-                }
-
-                @Override
-                public String getAuthenticationScheme() {
-                    return AUTHENTICATION_SCHEME;
-                }
-            });
+            createContext(requestContext, token);
 
         } catch (Exception e) {
             abortWithUnauthorized(requestContext);
@@ -101,7 +88,35 @@ public class AuthenticationFilter implements ContainerRequestFilter {
                         .build());
     }
 
-    private void validateToken(String token) throws Exception {
+    private void createContext(ContainerRequestContext requestContext, Token token) {
+        final SecurityContext currentSecurityContext = requestContext.getSecurityContext();
+        requestContext.setSecurityContext(new SecurityContext() {
+
+            @Override
+            public Principal getUserPrincipal() {
+                return () -> String.valueOf(token.getUserUUID());
+            }
+
+            @Override
+            public boolean isUserInRole(String role) {
+                return userService.getUserByUUID(token.getUserUUID())
+                        .map(u -> u.getRole().name().equals(role))
+                        .orElse(false);
+            }
+
+            @Override
+            public boolean isSecure() {
+                return currentSecurityContext.isSecure();
+            }
+
+            @Override
+            public String getAuthenticationScheme() {
+                return AUTHENTICATION_SCHEME;
+            }
+        });
+    }
+
+    private void validateToken(Token token) throws Exception {
         if(!authService.isTokenValid(token)){
             throw new CPAMException();
         };

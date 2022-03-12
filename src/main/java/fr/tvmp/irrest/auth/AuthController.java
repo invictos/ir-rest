@@ -28,6 +28,7 @@ public class AuthController {
             return Response.status(Response.Status.UNAUTHORIZED).build();
         }
 
-        return Response.ok(token.get()).build();
+        //We return only the string for simplicity
+        return Response.ok(token.get().getToken()).build();
     }
 }

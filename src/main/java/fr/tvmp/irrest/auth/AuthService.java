@@ -18,9 +18,9 @@ public class AuthService {
     @Inject
     UserService userService;
 
-    static HashSet<String> tokens = new HashSet<>();
+    static HashSet<Token> tokens = new HashSet<>();
 
-    public Optional<String> auth(Credentials credentials){
+    public Optional<Token> auth(Credentials credentials){
         return userService
                 .getUserByUUID(credentials.getUuid())
                 .flatMap(user -> { //We have a user matching uuid
@@ -28,7 +28,7 @@ public class AuthService {
                         return Optional.empty();
                     }
                     //User password is correct, generating token
-                    String token = generateToken(user);
+                    Token token = new Token(user);
                     tokens.add(token);
 
                     logger.info("Logged user ("+user.getPrenom()+") with token: " + token);
@@ -40,19 +40,7 @@ public class AuthService {
         return userService.validateUserPassword(user, credentials.getPassword());
     }
 
-    public boolean isTokenValid(@NonNull String token){
-        return isTokenValidUser(token).isPresent();
-    }
-
-    public Optional<UUID> isTokenValidUser(@NonNull String token){
-        if(!tokens.contains(token)){
-            return Optional.empty();
-        }
-        UUID id = UUID.fromString(token.split("_")[0]);
-        return Optional.of(id);
-    }
-
-    private static String generateToken(@NonNull UserEntity user){
-        return user.getId() + "_" + UUID.randomUUID().toString();
+    public boolean isTokenValid(@NonNull Token token){
+        return tokens.contains(token);
     }
 }

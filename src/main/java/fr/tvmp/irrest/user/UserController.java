@@ -10,8 +10,10 @@ import lombok.Data;
 import javax.inject.Inject;
 import javax.validation.Valid;
 import javax.ws.rs.*;
+import javax.ws.rs.core.Context;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
+import javax.ws.rs.core.SecurityContext;
 
 import java.util.List;
 import java.util.UUID;
@@ -40,8 +42,10 @@ public class UserController {
 
     @GET
     @Path("{id}")
-    @Secured({UserRole.ADMINISTRATIF})
-    public Response getByUUID(@PathParam("id") UUID id) {
+    @Secured({UserRole.ADMINISTRATIF, UserRole.PATIENT})
+    public Response getByUUID(@PathParam("id") UUID id, @Context SecurityContext context) {
+        if(userService.getUserByUUID(context.getUserPrincipal().getName()))
+
         UserEntity user = userService.getUserByUUID(id).orElseThrow(NotFoundException::new);
 
         return Response.ok(user).build();
