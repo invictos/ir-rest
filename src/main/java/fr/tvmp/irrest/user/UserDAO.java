@@ -1,5 +1,6 @@
 package fr.tvmp.irrest.user;
 
+import fr.tvmp.irrest.common.AbstractDAO;
 import lombok.NonNull;
 import org.jetbrains.annotations.NotNull;
 
@@ -14,34 +15,19 @@ import java.util.List;
 import java.util.UUID;
 import java.util.logging.Logger;
 
-public class UserDAO {
+public class UserDAO extends AbstractDAO<UserEntity> {
+    @Override
+    protected Class<UserEntity> getEntityClass() {
+        return UserEntity.class;
+    }
 
-    @Inject
-    EntityManager em;
-
-    @Inject
-    Logger logger;
-
-
+    @Override
     public List<UserEntity> getAll(){
-        CriteriaBuilder cb = em.getCriteriaBuilder();
-        CriteriaQuery<UserEntity> cq = cb.createQuery(UserEntity.class);
-        Root<UserEntity> rootEntry = cq.from(UserEntity.class);
+        CriteriaBuilder cb = getEntityManager().getCriteriaBuilder();
+        CriteriaQuery<UserEntity> cq = cb.createQuery(getEntityClass());
+        Root<UserEntity> rootEntry = cq.from(getEntityClass());
         CriteriaQuery<UserEntity> all = cq.select(rootEntry);
-        TypedQuery<UserEntity> allQuery = em.createQuery(all);
+        TypedQuery<UserEntity> allQuery = getEntityManager().createQuery(all);
         return allQuery.getResultList();
-    }
-
-    public UserEntity getUserByUUID(@NonNull UUID id){
-        return em.find(UserEntity.class, id);
-    }
-
-    @Transactional
-    public UserEntity addUser(@NotNull UserEntity user) {
-        logger.info("Adding: " + user);
-        em.getTransaction().begin();
-        em.persist(user);
-        em.getTransaction().commit();
-        return user;
     }
 }

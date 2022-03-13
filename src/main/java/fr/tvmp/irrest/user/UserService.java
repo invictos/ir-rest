@@ -1,5 +1,6 @@
 package fr.tvmp.irrest.user;
 
+import fr.tvmp.irrest.common.AbstractService;
 import lombok.NonNull;
 
 import javax.inject.Inject;
@@ -8,27 +9,35 @@ import java.util.List;
 import java.util.Objects;
 import java.util.Optional;
 import java.util.UUID;
-import java.util.logging.Logger;
 
-public class UserService {
+public class UserService extends AbstractService {
     @Inject
     UserDAO userDAO;
-
-    @Inject
-    Logger logger;
 
     public List<UserEntity> getAllUsers(){
         return userDAO.getAll();
     }
 
     public Optional<UserEntity> getUserByUUID(@NonNull UUID id){
-        return Optional.ofNullable(userDAO.getUserByUUID(id));
+        return Optional.ofNullable(userDAO.getByUUID(id));
+    }
+
+    public <T extends UserEntity> Optional<T> getUserByUUID(@NonNull UUID id, Class<T> userClass){
+        return getUserByUUID(id).flatMap(u -> {
+            T user = null;
+            try{
+                user = (userClass.cast(u));
+            }catch(ClassCastException e){
+                getLogger().info("Can't cast user "+ id + " to class " + userClass.getName());
+            }
+            return Optional.ofNullable(user);
+        });
     }
 
     public UserEntity addUser(@NonNull UserEntity user){
         String hashedPassword = hashPassword(user.getPassword());
         user.setPassword(hashedPassword);
-        return userDAO.addUser(user);
+        return userDAO.add(user);
     }
 
     public boolean validateUserPassword(@NotNull UserEntity user, @NotNull String password) {

@@ -1,9 +1,9 @@
 package fr.tvmp.irrest.user.patient;
 
 import fr.tvmp.irrest.auth.roles.Secured;
-import fr.tvmp.irrest.common.Adresse;
-import fr.tvmp.irrest.stub.PatientForm;
-import fr.tvmp.irrest.user.UserEntity;
+import fr.tvmp.irrest.common.AbstractController;
+import fr.tvmp.irrest.medical.TraitementEntity;
+import fr.tvmp.irrest.dto.PatientNewDTO;
 import fr.tvmp.irrest.user.UserRole;
 import fr.tvmp.irrest.user.UserService;
 
@@ -12,47 +12,34 @@ import javax.validation.Valid;
 import javax.ws.rs.*;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
+import java.util.List;
+import java.util.Set;
 import java.util.UUID;
 
 @Path("patient")
-@Produces(MediaType.APPLICATION_JSON)
-public class PatientController {
-    @Inject
-    PatientService patientService;
-
+public class PatientController extends AbstractController {
     @Inject
     UserService userService;
 
-    @GET
-    @Path("{id}/adresse")
-    @Secured({UserRole.PATIENT})
-    public Response getAdresseByUUID(@PathParam("id") UUID id) {
-        PatientEntity patient = patientService.getPatientByUUID(id).orElseThrow(NotFoundException::new);
-
-        return Response.ok(patient.getAdresse()).build();
-    }
-
-    @GET
-    @Path("random")
-    @Secured({UserRole.ADMINISTRATIF})
-    public PatientEntity addRandom(){
-        PatientEntity user = new PatientEntity(
-                "jean",
-                "de la fontaine",
-                "1234",
-                new Adresse("rue du chateau", "paris"),
-                100000
-        );
-
-        userService.addUser(user);
-
-        return user;
-    }
+    @Inject
+    PatientService patientService;
 
     @POST
     @Consumes(MediaType.APPLICATION_JSON)
     @Secured({UserRole.ADMINISTRATIF})
-    public Response add(@Valid PatientForm user){
+    public Response add(@Valid PatientNewDTO user){
         return Response.ok(userService.addUser(new PatientEntity(user))).build();
+    }
+
+    @GET
+    @Path("{id}/traitements")
+    @Secured({UserRole.PATIENT, UserRole.MEDECIN})
+    public Response getTraitements(@PathParam("id") UUID id){
+        authIsUUIDOrRole(id, UserRole.MEDECIN);
+
+        Set<TraitementEntity> traitements = patientService.getTraitementsByPatientUUID(id)
+                .orElseThrow(NotFoundException::new);
+
+        return Response.ok(traitements).build();
     }
 }

@@ -30,4 +30,10 @@ static private final String PERSISTANCE_UNIT_NAME = "devPU";
 
 ## TODO
 - [ ] NotNull ou NonNull ?
-- [ ] Secured per user
+- [X] Secured pour UN utilisateur
+- [ ] uuid vs id
+- [ ] AllArgsConstructor utile ? (meme chose pour toutes les annotations)
+
+## Questions
+- [ ] Service : passage Objet ou UUID ?
+- [ ] DTO -> Entity : création dans le controller ou dans le service ?

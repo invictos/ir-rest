@@ -1,6 +1,7 @@
 package fr.tvmp.irrest.auth;
 
-import fr.tvmp.irrest.stub.Credentials;
+import fr.tvmp.irrest.common.AbstractService;
+import fr.tvmp.irrest.dto.CredentialsDTO;
 import fr.tvmp.irrest.user.UserEntity;
 import fr.tvmp.irrest.user.UserService;
 import lombok.NonNull;
@@ -8,39 +9,35 @@ import lombok.NonNull;
 import javax.inject.Inject;
 import java.util.HashSet;
 import java.util.Optional;
-import java.util.UUID;
-import java.util.logging.Logger;
 
-public class AuthService {
-    @Inject
-    Logger logger;
-
+public class AuthService extends AbstractService {
     @Inject
     UserService userService;
 
     static HashSet<Token> tokens = new HashSet<>();
 
-    public Optional<Token> auth(Credentials credentials){
+    public Optional<Token> createToken(CredentialsDTO credentialsDTO){
         return userService
-                .getUserByUUID(credentials.getUuid())
+                .getUserByUUID(credentialsDTO.getUuid())
                 .flatMap(user -> { //We have a user matching uuid
-                    if(!isUserPasswordOK(user, credentials)) {
+                    if(!isUserPasswordOK(user, credentialsDTO)) {
                         return Optional.empty();
                     }
                     //User password is correct, generating token
                     Token token = new Token(user);
                     tokens.add(token);
 
-                    logger.info("Logged user ("+user.getPrenom()+") with token: " + token);
+                    getLogger().info("Logged user ("+user.getPrenom()+") with token: " + token);
                     return Optional.of(token);
                 });
     }
 
-    private boolean isUserPasswordOK(UserEntity user, Credentials credentials){
-        return userService.validateUserPassword(user, credentials.getPassword());
-    }
-
-    public boolean isTokenValid(@NonNull Token token){
+    public boolean validateToken(@NonNull Token token){
         return tokens.contains(token);
     }
+
+    private boolean isUserPasswordOK(UserEntity user, CredentialsDTO credentialsDTO){
+        return userService.validateUserPassword(user, credentialsDTO.getPassword());
+    }
+
 }

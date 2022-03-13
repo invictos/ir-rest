@@ -9,15 +9,18 @@
 
         <class>fr.tvmp.irrest.user.UserEntity</class>
         <class>fr.tvmp.irrest.user.patient.PatientEntity</class>
-
+        <class>fr.tvmp.irrest.user.administratif.AdministratifEntity</class>
+        <class>fr.tvmp.irrest.user.medecin.MedecinEntity</class>
+        <class>fr.tvmp.irrest.medical.TraitementEntity</class>
+        <class>fr.tvmp.irrest.medical.donneemedicale.DonneeMedicaleEntity</class>
 
         <properties>
             <property name="javax.persistence.jdbc.driver" value="org.postgresql.Driver" />
             <property name="javax.persistence.jdbc.url" value="jdbc:postgresql://db:5432/database1" />
             <property name="javax.persistence.jdbc.user" value="admin" />
             <property name="javax.persistence.jdbc.password" value="admin" />
-            <property name="hibernate.hbm2ddl.auto" value="create-drop"/>
-            <property name="hibernate.show_sql" value="true"/>
+            <property name="hibernate.hbm2ddl.auto" value="update"/>
+            <property name="hibernate.show_sql" value="false"/>
             <property name="hibernate.generate_statistics" value="true"/>
         </properties>
 
@@ -28,13 +31,18 @@
 
         <class>fr.tvmp.irrest.user.UserEntity</class>
         <class>fr.tvmp.irrest.user.patient.PatientEntity</class>
-
+        <class>fr.tvmp.irrest.user.administratif.AdministratifEntity</class>
+        <class>fr.tvmp.irrest.user.medecin.MedecinEntity</class>
+        <class>fr.tvmp.irrest.medical.TraitementEntity</class>
+        <class>fr.tvmp.irrest.medical.donneemedicale.DonneeMedicaleEntity</class>
+        <class>fr.tvmp.irrest.medical.TraitementEntity</class>
+        <class>fr.tvmp.irrest.medical.donneemedicale.DonneeMedicaleEntity</class>
 
         <properties>
             <property name="javax.persistence.jdbc.user" value="admin"/>
             <property name="javax.persistence.jdbc.password" value="admin"/>
             <property name="hibernate.hbm2ddl.auto" value="create-drop" />
-            <property name="hibernate.show_sql" value="false" />
+            <property name="hibernate.show_sql" value="true" />
             <property name="hibernate.generate_statistics" value="true"/>
         </properties>
     </persistence-unit>

@@ -1,32 +1,35 @@
 package fr.tvmp.irrest.user.patient;
 
-import fr.tvmp.irrest.user.UserEntity;
+import fr.tvmp.irrest.common.AbstractService;
+import fr.tvmp.irrest.medical.TraitementEntity;
+import fr.tvmp.irrest.user.UserRole;
 import fr.tvmp.irrest.user.UserService;
 import lombok.NonNull;
 
 import javax.inject.Inject;
-import javax.ws.rs.NotFoundException;
+import java.util.List;
 import java.util.Optional;
+import java.util.Set;
 import java.util.UUID;
-import java.util.logging.Logger;
 
-public class PatientService {
+public class PatientService extends AbstractService {
     @Inject
     UserService userService;
 
-    @Inject
-    Logger logger;
+    public Optional<Set<TraitementEntity>> getTraitementsByPatientUUID(@NonNull UUID patient){
+        return userService.getUserByUUID(patient, PatientEntity.class)
+                .map(u -> {
+                    getLogger().info(u.toString());
+                    return u;
+                })
+                .map(PatientEntity::getTraitements);
+    }
 
-    public Optional<PatientEntity> getPatientByUUID(@NonNull UUID uuid) {
-        return userService.getUserByUUID(uuid)
-                .flatMap(user -> {
-                    PatientEntity patient = null;
-                    try{
-                        patient = (PatientEntity) user;
-                    }catch(ClassCastException e){
-                        logger.info("Can't cast to PatientEntity");
-                    }
-                    return Optional.ofNullable(patient);
-                });
+    public Optional<PatientEntity> getPatientByNSS(@NonNull Integer nss){
+        return userService.getAllUsers().stream()
+                .filter(u -> u.getRole() == UserRole.PATIENT)
+                .map(p -> (PatientEntity) p)
+                .filter(p -> p.getNss().equals(nss))
+                .findFirst();
     }
 }

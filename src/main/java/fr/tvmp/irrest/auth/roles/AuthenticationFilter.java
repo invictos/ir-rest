@@ -3,7 +3,6 @@ package fr.tvmp.irrest.auth.roles;
 import fr.tvmp.irrest.CPAMException;
 import fr.tvmp.irrest.auth.AuthService;
 import fr.tvmp.irrest.auth.Token;
-import fr.tvmp.irrest.user.UserEntity;
 import fr.tvmp.irrest.user.UserService;
 
 import javax.annotation.Priority;
@@ -117,7 +116,7 @@ public class AuthenticationFilter implements ContainerRequestFilter {
     }
 
     private void validateToken(Token token) throws Exception {
-        if(!authService.isTokenValid(token)){
+        if(!authService.validateToken(token)){
             throw new CPAMException();
         };
     }
