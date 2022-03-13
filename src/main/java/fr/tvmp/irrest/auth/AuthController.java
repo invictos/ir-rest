@@ -1,33 +1,30 @@
 package fr.tvmp.irrest.auth;
 
-import fr.tvmp.irrest.stub.Credentials;
+import fr.tvmp.irrest.common.AbstractController;
+import fr.tvmp.irrest.dto.CredentialsDTO;
 
 import javax.inject.Inject;
 import javax.validation.Valid;
 import javax.ws.rs.*;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
-import java.util.logging.Logger;
 
 @Path("auth")
-@Produces(MediaType.APPLICATION_JSON)
-public class AuthController {
+public class AuthController extends AbstractController {
 
     @Inject
     AuthService authService;
 
-    @Inject
-    Logger logger;
-
     @POST
     @Consumes(MediaType.APPLICATION_JSON)
-    public Response getAuthToken(@Valid Credentials credentials){
-        var token = authService.auth(credentials);
+    public Response getAuthToken(@Valid CredentialsDTO credentialsDTO){
+        var token = authService.createToken(credentialsDTO);
 
         if(token.isEmpty()){
             return Response.status(Response.Status.UNAUTHORIZED).build();
         }
 
-        return Response.ok(token.get()).build();
+        //We return only the string for simplicity
+        return Response.ok(token.get().getToken()).build();
     }
 }
