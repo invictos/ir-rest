@@ -1,13 +1,12 @@
 package fr.tvmp.irrest.user.patient;
 
 import fr.tvmp.irrest.common.AbstractService;
-import fr.tvmp.irrest.medical.TraitementEntity;
+import fr.tvmp.irrest.traitement.TraitementEntity;
 import fr.tvmp.irrest.user.UserRole;
 import fr.tvmp.irrest.user.UserService;
 import lombok.NonNull;
 
 import javax.inject.Inject;
-import java.util.List;
 import java.util.Optional;
 import java.util.Set;
 import java.util.UUID;

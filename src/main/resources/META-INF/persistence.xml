@@ -11,8 +11,11 @@
         <class>fr.tvmp.irrest.user.patient.PatientEntity</class>
         <class>fr.tvmp.irrest.user.administratif.AdministratifEntity</class>
         <class>fr.tvmp.irrest.user.medecin.MedecinEntity</class>
-        <class>fr.tvmp.irrest.medical.TraitementEntity</class>
-        <class>fr.tvmp.irrest.medical.donneemedicale.DonneeMedicaleEntity</class>
+        <class>fr.tvmp.irrest.traitement.TraitementEntity</class>
+        <class>fr.tvmp.irrest.traitement.donneemedicale.DonneeMedicaleEntity</class>
+        <class>fr.tvmp.irrest.remboursement.RemboursementEntity</class>
+        <class>fr.tvmp.irrest.remboursement.RemboursableEntity</class>
+        <class>fr.tvmp.irrest.user.medecin.ConsultationEntity</class>
 
         <properties>
             <property name="javax.persistence.jdbc.driver" value="org.postgresql.Driver" />
@@ -33,10 +36,13 @@
         <class>fr.tvmp.irrest.user.patient.PatientEntity</class>
         <class>fr.tvmp.irrest.user.administratif.AdministratifEntity</class>
         <class>fr.tvmp.irrest.user.medecin.MedecinEntity</class>
-        <class>fr.tvmp.irrest.medical.TraitementEntity</class>
-        <class>fr.tvmp.irrest.medical.donneemedicale.DonneeMedicaleEntity</class>
-        <class>fr.tvmp.irrest.medical.TraitementEntity</class>
-        <class>fr.tvmp.irrest.medical.donneemedicale.DonneeMedicaleEntity</class>
+        <class>fr.tvmp.irrest.traitement.TraitementEntity</class>
+        <class>fr.tvmp.irrest.traitement.donneemedicale.DonneeMedicaleEntity</class>
+        <class>fr.tvmp.irrest.traitement.TraitementEntity</class>
+        <class>fr.tvmp.irrest.traitement.donneemedicale.DonneeMedicaleEntity</class>
+        <class>fr.tvmp.irrest.remboursement.RemboursementEntity</class>
+        <class>fr.tvmp.irrest.remboursement.RemboursableEntity</class>
+        <class>fr.tvmp.irrest.user.medecin.ConsultationEntity</class>
 
         <properties>
             <property name="javax.persistence.jdbc.user" value="admin"/>

@@ -1,6 +1,6 @@
 package fr.tvmp.irrest.dto;
 
-import fr.tvmp.irrest.medical.donneemedicale.DonneeMedicaleType;
+import fr.tvmp.irrest.traitement.donneemedicale.DonneeMedicaleType;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;

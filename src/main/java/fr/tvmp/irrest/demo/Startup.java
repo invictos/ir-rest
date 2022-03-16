@@ -1,11 +1,10 @@
 package fr.tvmp.irrest.demo;
 
-import fr.tvmp.irrest.CPAMApplication;
 import fr.tvmp.irrest.common.Adresse;
-import fr.tvmp.irrest.medical.TraitementEntity;
-import fr.tvmp.irrest.medical.TraitementService;
-import fr.tvmp.irrest.medical.donneemedicale.DonneeMedicaleEntity;
-import fr.tvmp.irrest.medical.donneemedicale.DonneeMedicaleType;
+import fr.tvmp.irrest.traitement.TraitementEntity;
+import fr.tvmp.irrest.traitement.TraitementService;
+import fr.tvmp.irrest.traitement.donneemedicale.DonneeMedicaleEntity;
+import fr.tvmp.irrest.traitement.donneemedicale.DonneeMedicaleType;
 import fr.tvmp.irrest.user.UserService;
 import fr.tvmp.irrest.user.administratif.AdministratifEntity;
 import fr.tvmp.irrest.user.medecin.MedecinEntity;
@@ -17,7 +16,6 @@ import javax.enterprise.context.ApplicationScoped;
 import javax.enterprise.context.Initialized;
 import javax.enterprise.event.Observes;
 import javax.inject.Inject;
-import java.util.List;
 import java.util.Set;
 import java.util.logging.Logger;
 

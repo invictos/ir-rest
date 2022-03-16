@@ -1,7 +1,8 @@
 package fr.tvmp.irrest.user.patient;
 
 import fr.tvmp.irrest.common.Adresse;
-import fr.tvmp.irrest.medical.TraitementEntity;
+import fr.tvmp.irrest.remboursement.RemboursementEntity;
+import fr.tvmp.irrest.traitement.TraitementEntity;
 import fr.tvmp.irrest.dto.PatientNewDTO;
 import fr.tvmp.irrest.user.UserEntity;
 import fr.tvmp.irrest.user.UserRole;
@@ -12,8 +13,6 @@ import javax.json.bind.annotation.JsonbPropertyOrder;
 import javax.json.bind.annotation.JsonbTransient;
 import javax.json.bind.config.PropertyOrderStrategy;
 import javax.persistence.*;
-import java.util.ArrayList;
-import java.util.List;
 import java.util.Set;
 
 @Entity
@@ -44,6 +43,10 @@ public class PatientEntity extends UserEntity {
     @JsonbTransient
     @OneToMany(mappedBy = "patient", fetch = FetchType.EAGER)
     @NonNull private Set<TraitementEntity> traitements;
+
+    @JsonbTransient
+    @OneToMany(mappedBy = "patient", fetch = FetchType.EAGER)
+    @NonNull private Set<RemboursementEntity> remboursements;
 
     @Override
     public UserRole getRole() {

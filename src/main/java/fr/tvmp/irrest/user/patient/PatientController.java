@@ -2,7 +2,7 @@ package fr.tvmp.irrest.user.patient;
 
 import fr.tvmp.irrest.auth.roles.Secured;
 import fr.tvmp.irrest.common.AbstractController;
-import fr.tvmp.irrest.medical.TraitementEntity;
+import fr.tvmp.irrest.traitement.TraitementEntity;
 import fr.tvmp.irrest.dto.PatientNewDTO;
 import fr.tvmp.irrest.user.UserRole;
 import fr.tvmp.irrest.user.UserService;
@@ -12,7 +12,6 @@ import javax.validation.Valid;
 import javax.ws.rs.*;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
-import java.util.List;
 import java.util.Set;
 import java.util.UUID;
 
