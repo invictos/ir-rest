@@ -3,4 +3,3 @@
 
 target
 deployments/*
-!deployments/postgresql-42.3.3.jar
