@@ -1,5 +1,6 @@
 package fr.tvmp.irrest.common;
 
+import fr.tvmp.irrest.user.UserService;
 import lombok.Getter;
 
 import javax.inject.Inject;

@@ -1,6 +1,7 @@
 package fr.tvmp.irrest.user.patient;
 
 import fr.tvmp.irrest.common.AbstractService;
+import fr.tvmp.irrest.remboursement.RemboursableEntity;
 import fr.tvmp.irrest.traitement.TraitementEntity;
 import fr.tvmp.irrest.user.UserRole;
 import fr.tvmp.irrest.user.UserService;
@@ -30,5 +31,9 @@ public class PatientService extends AbstractService {
                 .map(p -> (PatientEntity) p)
                 .filter(p -> p.getNss().equals(nss))
                 .findFirst();
+    }
+
+    public void rembourser(PatientEntity patient, RemboursableEntity remboursable) {
+        getLogger().info("Virement de " + remboursable.getRemboursement() + "€ sur " + patient.getIban());
     }
 }

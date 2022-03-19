@@ -40,6 +40,8 @@ public class PatientEntity extends UserEntity {
 
     @NonNull private Integer nss;
 
+    @NonNull private String iban;
+
     @JsonbTransient
     @OneToMany(mappedBy = "patient", fetch = FetchType.EAGER)
     @NonNull private Set<TraitementEntity> traitements;

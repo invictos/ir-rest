@@ -1,6 +1,7 @@
 package fr.tvmp.irrest.user.medecin;
 
 import fr.tvmp.irrest.common.Adresse;
+import fr.tvmp.irrest.common.MedecinType;
 import fr.tvmp.irrest.user.UserEntity;
 import fr.tvmp.irrest.user.UserRole;
 import lombok.*;

@@ -8,7 +8,7 @@ import fr.tvmp.irrest.traitement.donneemedicale.DonneeMedicaleType;
 import fr.tvmp.irrest.user.UserService;
 import fr.tvmp.irrest.user.administratif.AdministratifEntity;
 import fr.tvmp.irrest.user.medecin.MedecinEntity;
-import fr.tvmp.irrest.user.medecin.MedecinType;
+import fr.tvmp.irrest.common.MedecinType;
 import fr.tvmp.irrest.user.patient.PatientEntity;
 import fr.tvmp.irrest.user.patient.PatientService;
 
