@@ -33,7 +33,10 @@ static private final String PERSISTANCE_UNIT_NAME = "devPU";
 - [X] Secured pour UN utilisateur
 - [ ] uuid vs id
 - [ ] AllArgsConstructor utile ? (meme chose pour toutes les annotations)
+- [ ] Check todos
 
 ## Questions
 - [ ] Service : passage Objet ou UUID ?
 - [ ] DTO -> Entity : création dans le controller ou dans le service ?
+- [X] Pourquoi le ifFoundCollection ne marche pas ?
+

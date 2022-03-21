@@ -1,0 +1,19 @@
+GET 	/user/<user_id>					                Profil d'un utilisateur					        User 		    -> 200 PatientDTO/MedecinDTO/AdministratifDTO
+
+POST	/patients					                    Ajoute un patient						        CPAM 		    -> 201 PatientNewDTO : PatientDTO
+GET	    /patients/all					                Liste des utilisateurs						    CPAM		    -> 200 UserPublicDTO
+GET     /patients/<pat_id>/                         	Infos d'un patient (mutuelle,banque,adresse)    patient/CPAM	-> 200 PatientDTO
+PUT+GET /patients/<pat_id>/banque                     	Change la banque                                CPAM/Patient	-> 204 / 200 Banque
+PUT+GET /patients/<pat_id>/adresse                   	Change l'adresse                                Patient		    -> 204 / 200 Adresse
+
+GET 	/remboursements/patient/<pat_id>		        Remboursements d'un patient					    Patient,CPAM	-> 200 RemboursementDTO[]
+GET     /remboursements/<remb_id>                   	Affiche un remboursement                        PatientCPAM	    -> 200 RemboursementDTO
+POST    /remboursements/patient/<pat_id>/consultation  	Création d'un remboursement, visite  médical    Medecin		    -> 201 X(header) : RemboursementDTO
+
+GET	    /traitements/patient/<pat_id>			        Traitements d'un patient (dossier médical)      Medecin+Patient	-> 200 TraitementDTO[]
+POST    /traitements            			            Ajout  d'un traitement                          Medecin		    -> 201 TraitementNewDTO : TraitementDTO
+GET	    /traitements/<traitement_id>			        Affiche un traitement						    Medecin+Patient	-> 200 TraitementDTO
+POST    /traitements/<traitement_id>/donnees	       	Ajoute une donnée					            Medecin		    -> 201 DonnéeNewDTO : DonnéeDTO
+DELETE 	/traitements/<traitement_id>/donnees/<did>      Supprime une donnée						        Medecin		    -> 204
+
+POST	/auth						                    Obtenir un token						        ALL		        -> 200 CredentialsDTO : TokenDTO

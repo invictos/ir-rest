@@ -7,15 +7,15 @@
         <provider>org.hibernate.jpa.HibernatePersistenceProvider</provider>
 
 
-        <class>fr.tvmp.irrest.user.UserEntity</class>
-        <class>fr.tvmp.irrest.user.patient.PatientEntity</class>
-        <class>fr.tvmp.irrest.user.administratif.AdministratifEntity</class>
-        <class>fr.tvmp.irrest.user.medecin.MedecinEntity</class>
-        <class>fr.tvmp.irrest.traitement.TraitementEntity</class>
-        <class>fr.tvmp.irrest.traitement.donneemedicale.DonneeMedicaleEntity</class>
-        <class>fr.tvmp.irrest.remboursement.RemboursementEntity</class>
-        <class>fr.tvmp.irrest.remboursement.RemboursableEntity</class>
-        <class>fr.tvmp.irrest.user.medecin.ConsultationEntity</class>
+        <class>fr.tvmp.irrest.server.user.UserEntity</class>
+        <class>fr.tvmp.irrest.server.user.patient.PatientEntity</class>
+        <class>fr.tvmp.irrest.server.user.administratif.AdministratifEntity</class>
+        <class>fr.tvmp.irrest.server.user.medecin.MedecinEntity</class>
+        <class>fr.tvmp.irrest.server.traitement.TraitementEntity</class>
+        <class>fr.tvmp.irrest.server.traitement.donneemedicale.DonneeMedicaleEntity</class>
+        <class>fr.tvmp.irrest.server.remboursement.RemboursementEntity</class>
+        <class>fr.tvmp.irrest.server.remboursement.ARemboursable</class>
+        <class>fr.tvmp.irrest.server.user.medecin.ConsultationEntity</class>
 
         <properties>
             <property name="javax.persistence.jdbc.driver" value="org.postgresql.Driver" />
@@ -32,17 +32,17 @@
         <jta-data-source>java:jboss/datasources/ExampleDS</jta-data-source>
 
 
-        <class>fr.tvmp.irrest.user.UserEntity</class>
-        <class>fr.tvmp.irrest.user.patient.PatientEntity</class>
-        <class>fr.tvmp.irrest.user.administratif.AdministratifEntity</class>
-        <class>fr.tvmp.irrest.user.medecin.MedecinEntity</class>
-        <class>fr.tvmp.irrest.traitement.TraitementEntity</class>
-        <class>fr.tvmp.irrest.traitement.donneemedicale.DonneeMedicaleEntity</class>
-        <class>fr.tvmp.irrest.traitement.TraitementEntity</class>
-        <class>fr.tvmp.irrest.traitement.donneemedicale.DonneeMedicaleEntity</class>
-        <class>fr.tvmp.irrest.remboursement.RemboursementEntity</class>
-        <class>fr.tvmp.irrest.remboursement.RemboursableEntity</class>
-        <class>fr.tvmp.irrest.user.medecin.ConsultationEntity</class>
+        <class>fr.tvmp.irrest.server.user.UserEntity</class>
+        <class>fr.tvmp.irrest.server.user.patient.PatientEntity</class>
+        <class>fr.tvmp.irrest.server.user.administratif.AdministratifEntity</class>
+        <class>fr.tvmp.irrest.server.user.medecin.MedecinEntity</class>
+        <class>fr.tvmp.irrest.server.traitement.TraitementEntity</class>
+        <class>fr.tvmp.irrest.server.traitement.donneemedicale.DonneeMedicaleEntity</class>
+        <class>fr.tvmp.irrest.server.traitement.TraitementEntity</class>
+        <class>fr.tvmp.irrest.server.traitement.donneemedicale.DonneeMedicaleEntity</class>
+        <class>fr.tvmp.irrest.server.remboursement.RemboursementEntity</class>
+        <class>fr.tvmp.irrest.server.remboursement.ARemboursable</class>
+        <class>fr.tvmp.irrest.server.user.medecin.ConsultationEntity</class>
 
         <properties>
             <property name="javax.persistence.jdbc.user" value="admin"/>

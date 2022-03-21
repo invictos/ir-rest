@@ -8,7 +8,6 @@ import lombok.RequiredArgsConstructor;
 @Data
 @NoArgsConstructor
 @RequiredArgsConstructor
-public class Adresse {
-    @NonNull private String rue;
-    @NonNull private String ville;
+public class Banque {
+    @NonNull private String iban;
 }
