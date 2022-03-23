@@ -1,6 +1,6 @@
 package fr.tvmp.irrest.server.user;
 
-import fr.tvmp.irrest.common.dto.utilisateur.UserDTO;
+import fr.tvmp.irrest.common.dto.utilisateur.UserRole;
 import fr.tvmp.irrest.server.CPAMEntity;
 import fr.tvmp.irrest.server.common.ToDTO;
 import lombok.AllArgsConstructor;

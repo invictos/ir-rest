@@ -2,7 +2,7 @@ GET 	/user/<user_id>					                Profil d'un utilisateur					        Use
 GET	    /user/all					                    Liste des utilisateurs						    CPAM		    -> 200 UserPublicDTO
 
 POST	/patients					                    Ajoute un patient						        CPAM 		    -> 201 PatientNewDTO : PatientDTO
-GET     /patients/<pat_id>/                         	Infos d'un patient (mutuelle,banque,adresse)    patient/CPAM	-> 200 PatientDTO
+GET     /patients/<ssn>/                         	    Récupère un patient via NSS                     patient/CPAM	-> 200 PatientDTO
 PUT+GET /patients/<pat_id>/banque                     	Change la banque                                CPAM/Patient	-> 204 / 200 Banque
 PUT+GET /patients/<pat_id>/adresse                   	Change l'adresse                                Patient		    -> 204 / 200 Adresse
 

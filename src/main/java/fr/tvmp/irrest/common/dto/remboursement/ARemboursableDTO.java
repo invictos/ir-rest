@@ -1,5 +1,6 @@
 package fr.tvmp.irrest.common.dto.remboursement;
 
+import fr.tvmp.irrest.common.dto.CPAMDto;
 import fr.tvmp.irrest.common.dto.utilisateur.AdministratifDTO;
 import fr.tvmp.irrest.common.dto.utilisateur.MedecinDTO;
 import fr.tvmp.irrest.common.dto.utilisateur.PatientDTO;
@@ -19,7 +20,7 @@ import org.codehaus.jackson.annotate.JsonTypeInfo;
         @JsonSubTypes.Type(name = "Medecin", value = MedecinDTO.class),
         @JsonSubTypes.Type(name = "Administratif", value = AdministratifDTO.class)
 })
-public abstract class ARemboursableDTO {
+public abstract class ARemboursableDTO implements CPAMDto {
     @NonNull Float prix;
     @NonNull Float tauxCPAM;
     @NonNull Float remboursement;

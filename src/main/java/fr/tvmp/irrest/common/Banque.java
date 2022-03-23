@@ -1,5 +1,6 @@
 package fr.tvmp.irrest.common;
 
+import fr.tvmp.irrest.common.dto.CPAMDto;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import lombok.NonNull;

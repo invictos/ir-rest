@@ -15,12 +15,12 @@ import java.util.UUID;
 public class PatientDTO extends UserDTO{
     @NonNull private Adresse adresse;
 
-    @NonNull private Integer nss;
+    @NonNull private String nss;
 
     @NonNull private Banque banque;
 
-    public PatientDTO(@NonNull UUID id, @NotNull String prenom, @NotNull String nom, @NonNull Adresse adresse, @NonNull Integer nss, @NonNull Banque banque) {
-        super(id, prenom, nom);
+    public PatientDTO(@NonNull UUID id, @NotNull String prenom, @NotNull String nom, @NonNull Adresse adresse, @NonNull String nss, @NonNull Banque banque, @NonNull UserRole role) {
+        super(id, prenom, nom, role);
         this.adresse = adresse;
         this.nss = nss;
         this.banque = banque;

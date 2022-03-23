@@ -12,7 +12,7 @@ import java.util.UUID;
 
 @Data
 @RequiredArgsConstructor
-public class Token implements ToDTO<TokenDTO> {
+public class Token implements ToDTO {
     @NonNull private String token;
 
     public Token(@NonNull UserEntity user){

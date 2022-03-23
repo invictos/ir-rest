@@ -1,6 +1,6 @@
 package fr.tvmp.irrest.server.common;
 
-import fr.tvmp.irrest.server.user.UserRole;
+import fr.tvmp.irrest.common.dto.utilisateur.UserRole;
 import lombok.Getter;
 
 import javax.ws.rs.ForbiddenException;
@@ -29,8 +29,8 @@ public abstract class AbstractController {
 
     /**
      * Allows user if it has the provided UUID
-     * @param uuid
-     * @throws ForbiddenException
+     * @param uuid the user's ID
+     * @throws ForbiddenException returned if the provided UUID isn't the user UUID
      */
     protected void authIsUUID(UUID uuid) throws ForbiddenException{
         UUID contextUUID = UUID.fromString(getPrincipal().getName());
@@ -86,7 +86,7 @@ public abstract class AbstractController {
      * @param obj Object to turn to DTO. Implements ToDTO
      * @return Response
      */
-    protected <T> Response createResponse(Response.StatusType status, ToDTO<T> obj){
+    protected Response createResponse(Response.StatusType status, ToDTO obj){
         return Response.status(status)
                 .entity(obj.toDTO())
                 .build();
@@ -98,7 +98,7 @@ public abstract class AbstractController {
      * @param objs Collection of object to turn into DTO. each Implements ToDTO
      * @return Response
      */
-    private <A, T extends ToDTO<A>> Response createResponse(Response.StatusType status, Collection<T> objs){
+    private <T extends ToDTO> Response createResponse(Response.StatusType status, Collection<T> objs){
         return Response.status(status)
                 .entity(objs.stream()
                         .map(ToDTO::toDTO)
@@ -111,7 +111,7 @@ public abstract class AbstractController {
      * @param obj Object to serialize to DTO
      * @return Response
      */
-    protected <T> Response ok(ToDTO<? extends T> obj){
+    protected <T extends ToDTO> Response ok(T obj){
         return createResponse(Response.Status.OK, obj);
     }
 
@@ -120,7 +120,7 @@ public abstract class AbstractController {
      * @param objs Collection of Objects to serialize to DTO
      * @return Response
      */
-    protected <A, T extends ToDTO<A>> Response ok(Collection<T> objs){
+    protected Response ok(Collection<? extends ToDTO> objs){
         return createResponse(Response.Status.OK, objs);
     }
 
@@ -130,7 +130,7 @@ public abstract class AbstractController {
      * @param status Response.Status
      * @return Response
      */
-    protected <A, T extends ToDTO<A>> Response ifFound(Optional<T> obj, Response.Status status){
+    protected Response ifFound(Optional<? extends ToDTO> obj, Response.Status status){
         if(obj.isEmpty()){
             return createResponse(Response.Status.NOT_FOUND);
         }
@@ -142,7 +142,7 @@ public abstract class AbstractController {
      * @param obj Optional object to turn into DTO
      * @return Response
      */
-    protected <A, T extends ToDTO<A>> Response ifFound(Optional<T> obj){
+    protected Response ifFound(Optional<? extends ToDTO> obj){
         return ifFound(obj, Response.Status.OK);
     }
 
@@ -152,7 +152,7 @@ public abstract class AbstractController {
      * @param status Response.Status
      * @return Response
      */
-    protected <T, B extends ToDTO<T>, C extends Collection<B>> Response ifFoundCollection(Optional<C> objs, Response.Status status){
+    protected Response ifFoundCollection(Optional<? extends Collection<? extends ToDTO>> objs, Response.Status status){
         if(objs.isEmpty()){
             return createResponse(Response.Status.NOT_FOUND);
         }
@@ -164,7 +164,7 @@ public abstract class AbstractController {
      * @param objs Optional objects to turn into DTOs
      * @return Response
      */
-    protected <T, B extends ToDTO<T>, C extends Collection<B>> Response ifFoundCollection(Optional<C> objs){
+    protected Response ifFoundCollection(Optional<? extends Collection<? extends ToDTO>> objs){
         return ifFoundCollection(objs, Response.Status.OK);
     }
 

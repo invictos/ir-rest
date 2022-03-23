@@ -1,5 +1,6 @@
 package fr.tvmp.irrest.server.user;
 
+import fr.tvmp.irrest.common.dto.utilisateur.UserRole;
 import fr.tvmp.irrest.server.common.AbstractService;
 import lombok.NonNull;
 

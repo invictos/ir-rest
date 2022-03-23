@@ -20,7 +20,7 @@ import java.util.UUID;
 @EqualsAndHashCode(callSuper = true)
 @JsonbPropertyOrder(PropertyOrderStrategy.LEXICOGRAPHICAL)
 @Table(name = "consultation")
-public class ConsultationEntity extends ARemboursable<ConsultationDTO> {
+public class ConsultationEntity extends ARemboursable {
 
     @JsonbTransient
     @ManyToOne(fetch = FetchType.EAGER, optional = false)

@@ -1,4 +1,4 @@
-package fr.tvmp.irrest.server.user;
+package fr.tvmp.irrest.common.dto.utilisateur;
 
 public enum UserRole {
     PATIENT,

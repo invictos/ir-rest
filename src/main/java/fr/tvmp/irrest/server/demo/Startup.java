@@ -42,7 +42,7 @@ public class Startup {
 
     static final String PERSISTANCE_MODE = "update"; // vs create-drop
 
-    static final Integer FLAG_USER_NSS = 965247536;
+    static final String FLAG_USER_NSS = "965247536";
 
     public void onStart(@Observes @Initialized(ApplicationScoped.class) Object pointless) {
         if(PERSISTANCE_MODE != "update" || !alreadyInitialized()){
@@ -77,10 +77,10 @@ public class Startup {
         //Patients
         userService.addUser(new PatientEntity("paul", "mcCain", "1234",
                 new Adresse("rue de Lille", "Lille"),
-                1123456, new Banque("FR0000000000000001")));
+                "1123456", new Banque("FR0000000000000001")));
         userService.addUser(new PatientEntity("adrien", "lapierre", "1234",
                 new Adresse("rue de Dijon", "Dijon"),
-                1234567, new Banque("FR0000000000000002")));
+                "1234567", new Banque("FR0000000000000002")));
 
         //Administratif
         userService.addUser(new AdministratifEntity("eric", "dupont", "1234",
@@ -101,7 +101,7 @@ public class Startup {
     public void doConsultation(){
         PatientEntity patient = (PatientEntity) userService.addUser(new PatientEntity("manon", "dumont", "1234",
                 new Adresse("rue de Marseille", "Marseille"),
-                2345678, new Banque("FR0000000000000003")));
+                "2345678", new Banque("FR0000000000000003")));
 
         MedecinEntity medecin = (MedecinEntity) userService.addUser(new MedecinEntity("Docteur", "Maboul", "1234",
                 MedecinType.GENERALISTE,

@@ -1,9 +1,8 @@
 package fr.tvmp.irrest.server.user.administratif;
 
 import fr.tvmp.irrest.common.dto.utilisateur.AdministratifDTO;
-import fr.tvmp.irrest.common.dto.utilisateur.UserDTO;
 import fr.tvmp.irrest.server.user.UserEntity;
-import fr.tvmp.irrest.server.user.UserRole;
+import fr.tvmp.irrest.common.dto.utilisateur.UserRole;
 import lombok.*;
 
 import javax.json.bind.annotation.JsonbPropertyOrder;
@@ -34,6 +33,6 @@ public class AdministratifEntity extends UserEntity {
 
     @Override
     public AdministratifDTO toDTO() {
-        return new AdministratifDTO(getId(), getPrenom(), getPrenom(), getEchelon());
+        return new AdministratifDTO(getId(), getPrenom(), getPrenom(), getEchelon(), getRole());
     }
 }

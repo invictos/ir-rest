@@ -1,6 +1,7 @@
 package fr.tvmp.irrest.server.user;
 
 
+import fr.tvmp.irrest.common.dto.utilisateur.UserRole;
 import fr.tvmp.irrest.server.auth.roles.Secured;
 import fr.tvmp.irrest.server.common.AbstractController;
 
@@ -9,7 +10,6 @@ import javax.ws.rs.*;
 import javax.ws.rs.core.Response;
 
 import java.util.UUID;
-import java.util.stream.Collectors;
 
 @Path("user")
 public class UserController extends AbstractController {

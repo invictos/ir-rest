@@ -24,7 +24,7 @@ import javax.persistence.Table;
 @EqualsAndHashCode(callSuper = true)
 @JsonbPropertyOrder(PropertyOrderStrategy.LEXICOGRAPHICAL)
 @Table(name = "donnees_medicales")
-public class DonneeMedicaleEntity extends CPAMEntity implements ToDTO<DonneeMedicaleDTO> {
+public class DonneeMedicaleEntity extends CPAMEntity implements ToDTO {
 
     @ManyToOne
     @JsonbTransient

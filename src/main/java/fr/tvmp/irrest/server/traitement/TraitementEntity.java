@@ -26,7 +26,7 @@ import java.util.stream.Collectors;
 @EqualsAndHashCode(callSuper = true)
 @JsonbPropertyOrder(PropertyOrderStrategy.LEXICOGRAPHICAL)
 @Table(name = "traitement")
-public class TraitementEntity extends CPAMEntity implements ToDTO<TraitementDTO> {
+public class TraitementEntity extends CPAMEntity implements ToDTO {
 
     @JsonbTransient
     @ManyToOne(fetch = FetchType.EAGER, optional = false)

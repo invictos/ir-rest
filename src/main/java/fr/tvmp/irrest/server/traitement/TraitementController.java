@@ -4,7 +4,7 @@ import fr.tvmp.irrest.common.dto.traitement.DonneeMedicaleNewDTO;
 import fr.tvmp.irrest.server.auth.roles.Secured;
 import fr.tvmp.irrest.server.common.AbstractController;
 import fr.tvmp.irrest.common.dto.traitement.TraitementNewDTO;
-import fr.tvmp.irrest.server.user.UserRole;
+import fr.tvmp.irrest.common.dto.utilisateur.UserRole;
 
 import javax.inject.Inject;
 import javax.validation.Valid;
@@ -13,7 +13,7 @@ import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 import java.util.UUID;
 
-@Path("traitement")
+@Path("traitements")
 public class TraitementController extends AbstractController {
     @Inject
     TraitementService traitementService;

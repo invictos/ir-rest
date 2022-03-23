@@ -1,6 +1,6 @@
 package fr.tvmp.irrest.server.auth.roles;
 
-import fr.tvmp.irrest.server.user.UserRole;
+import fr.tvmp.irrest.common.dto.utilisateur.UserRole;
 
 import javax.ws.rs.NameBinding;
 import java.lang.annotation.Retention;

@@ -1,5 +1,6 @@
 package fr.tvmp.irrest.common.dto.utilisateur;
 
+import fr.tvmp.irrest.common.dto.CPAMDto;
 import lombok.*;
 import org.codehaus.jackson.annotate.JsonSubTypes;
 import org.codehaus.jackson.annotate.JsonTypeInfo;
@@ -16,8 +17,9 @@ import java.util.UUID;
         @JsonSubTypes.Type(name = "Medecin", value = MedecinDTO.class),
         @JsonSubTypes.Type(name = "Administratif", value = AdministratifDTO.class)
 })
-public abstract class UserDTO {
+public abstract class UserDTO implements CPAMDto {
     @NonNull private UUID id;
     @NotNull private String prenom;
     @NotNull private String nom;
+    @NonNull private UserRole role;
 }

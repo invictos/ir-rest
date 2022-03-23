@@ -22,7 +22,7 @@ import java.util.stream.Collectors;
 @EqualsAndHashCode(callSuper = true)
 @JsonbPropertyOrder(PropertyOrderStrategy.LEXICOGRAPHICAL)
 @Table(name = "remboursement")
-public class RemboursementEntity extends CPAMEntity implements ToDTO<RemboursementDTO> {
+public class RemboursementEntity extends CPAMEntity implements ToDTO {
     @JsonbTransient
     @EqualsAndHashCode.Exclude
     @ManyToOne(fetch = FetchType.EAGER, optional = false)
@@ -48,7 +48,9 @@ public class RemboursementEntity extends CPAMEntity implements ToDTO<Rembourseme
                 getId(),
                 getPatient().getId(),
                 getMedecin().getId(),
-                getRemboursables().stream().map(ARemboursable::toDTO).collect(Collectors.toList())
+                getRemboursables().stream()
+                        .map(r -> (ARemboursableDTO) r.toDTO())
+                        .collect(Collectors.toList())
         );
     }
 }

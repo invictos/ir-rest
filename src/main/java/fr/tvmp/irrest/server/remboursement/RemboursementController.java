@@ -2,18 +2,13 @@ package fr.tvmp.irrest.server.remboursement;
 
 import fr.tvmp.irrest.server.auth.roles.Secured;
 import fr.tvmp.irrest.server.common.AbstractController;
-import fr.tvmp.irrest.common.dto.traitement.TraitementNewDTO;
-import fr.tvmp.irrest.server.traitement.TraitementEntity;
-import fr.tvmp.irrest.server.traitement.TraitementService;
-import fr.tvmp.irrest.server.user.UserRole;
+import fr.tvmp.irrest.common.dto.utilisateur.UserRole;
 
 import javax.inject.Inject;
-import javax.validation.Valid;
 import javax.ws.rs.*;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 import java.util.UUID;
-import java.util.stream.Collectors;
 
 @Path("remboursements")
 public class RemboursementController extends AbstractController {

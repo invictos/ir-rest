@@ -3,7 +3,7 @@ package fr.tvmp.irrest.server.auth.roles;
 import fr.tvmp.irrest.server.CPAMException;
 import fr.tvmp.irrest.server.user.UserEntity;
 import fr.tvmp.irrest.server.user.UserService;
-import fr.tvmp.irrest.server.user.UserRole;
+import fr.tvmp.irrest.common.dto.utilisateur.UserRole;
 
 import javax.annotation.Priority;
 import javax.inject.Inject;

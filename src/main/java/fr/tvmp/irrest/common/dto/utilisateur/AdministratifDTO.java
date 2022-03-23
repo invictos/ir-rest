@@ -10,8 +10,8 @@ import java.util.UUID;
 public class AdministratifDTO extends UserDTO{
     @NonNull private Integer echelon;
 
-    public AdministratifDTO(@NonNull UUID id, @NotNull String prenom, @NotNull String nom, @NonNull Integer echelon) {
-        super(id, prenom, nom);
+    public AdministratifDTO(@NonNull UUID id, @NotNull String prenom, @NotNull String nom, @NonNull Integer echelon, @NonNull UserRole role) {
+        super(id, prenom, nom, role);
         this.echelon = echelon;
     }
 }
