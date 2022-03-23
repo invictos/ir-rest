@@ -1,7 +1,8 @@
 package fr.tvmp.irrest.server.user;
 
+import fr.tvmp.irrest.common.dto.utilisateur.UserDTO;
 import fr.tvmp.irrest.server.CPAMEntity;
-import fr.tvmp.irrest.common.dto.utilisateur.UserPublicDTO;
+import fr.tvmp.irrest.server.common.ToDTO;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
@@ -24,7 +25,7 @@ import java.io.Serializable;
 @JsonbPropertyOrder(PropertyOrderStrategy.LEXICOGRAPHICAL)
 @Inheritance(strategy = InheritanceType.JOINED)
 @Table(name = "utilisateurs")
-public abstract class UserEntity extends CPAMEntity implements Serializable {
+public abstract class UserEntity extends CPAMEntity implements Serializable, ToDTO {
 
     @NotNull private String prenom;
     @NotNull private String nom;
@@ -34,8 +35,4 @@ public abstract class UserEntity extends CPAMEntity implements Serializable {
 
     @JsonbProperty("role")
     public abstract UserRole getRole();
-
-    public UserPublicDTO toUserSmall(){
-        return new UserPublicDTO(this.getId(), this.getPrenom(), this.getNom());
-    }
 }

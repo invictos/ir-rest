@@ -3,6 +3,7 @@ package fr.tvmp.irrest.server.user.patient;
 import fr.tvmp.irrest.common.Adresse;
 import fr.tvmp.irrest.common.Banque;
 import fr.tvmp.irrest.common.dto.utilisateur.PatientDTO;
+import fr.tvmp.irrest.common.dto.utilisateur.UserDTO;
 import fr.tvmp.irrest.server.common.ToDTO;
 import fr.tvmp.irrest.server.remboursement.RemboursementEntity;
 import fr.tvmp.irrest.server.traitement.TraitementEntity;
@@ -24,7 +25,7 @@ import java.util.Set;
 @EqualsAndHashCode(callSuper = true)
 @JsonbPropertyOrder(PropertyOrderStrategy.LEXICOGRAPHICAL)
 @Table(name = "patient")
-public class PatientEntity extends UserEntity implements ToDTO<PatientDTO> {
+public class PatientEntity extends UserEntity {
 
     public PatientEntity(@NonNull String prenom, @NonNull String nom, @NonNull String password, @NonNull Adresse adresse, @NonNull Integer nss, @NonNull Banque banque) {
         super(prenom, nom, password);
@@ -60,6 +61,6 @@ public class PatientEntity extends UserEntity implements ToDTO<PatientDTO> {
 
     @Override
     public PatientDTO toDTO() {
-        return new PatientDTO(getAdresse(), getNss(), getBanque());
+        return new PatientDTO(getId(), getPrenom(), getNom(), getAdresse(), getNss(), getBanque());
     }
 }

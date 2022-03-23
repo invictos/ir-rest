@@ -13,13 +13,13 @@ import javax.persistence.Table;
 /**
  * Pas une interface car les interfaces ne fonctionnent pas avec JPA.
  * On utilise donc InheritanceType.TABLE_PER_CLASS
+ * @param <T> Le DTO associé
  */
-
 @Entity
 @EqualsAndHashCode(callSuper = true)
 @Inheritance(strategy = InheritanceType.TABLE_PER_CLASS)
 @Table(name = "remboursable")
-public abstract class ARemboursable extends CPAMEntity implements ToDTO<ARemboursableDTO> {
+public abstract class ARemboursable<T extends ARemboursableDTO> extends CPAMEntity implements ToDTO<T> {
     public abstract Float getPrix();
 
     public abstract Float getTauxCPAM();
@@ -27,10 +27,4 @@ public abstract class ARemboursable extends CPAMEntity implements ToDTO<ARembour
     public Float getRemboursement(){
         return getPrix()*getTauxCPAM();
     }
-
-    @Override
-    public ARemboursableDTO toDTO(){
-        return new ARemboursableDTO(getPrix(), getTauxCPAM(), getRemboursement());
-    }
-
 }

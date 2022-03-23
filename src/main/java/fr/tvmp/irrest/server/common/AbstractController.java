@@ -71,16 +71,33 @@ public abstract class AbstractController {
         return principal;
     }
 
+    /**
+     * Creates a response with custom StatusType
+     * @param statusType status
+     * @return Response
+     */
     protected Response createResponse(Response.StatusType statusType){
         return Response.status(statusType).build();
     }
 
+    /**
+     * Creates a response with custom StatusType & serialize given object to DTO
+     * @param status status
+     * @param obj Object to turn to DTO. Implements ToDTO
+     * @return Response
+     */
     protected <T> Response createResponse(Response.StatusType status, ToDTO<T> obj){
         return Response.status(status)
                 .entity(obj.toDTO())
                 .build();
     }
 
+    /**
+     * Creates a response with custom StatusType & serialize given objects to DTO
+     * @param status status
+     * @param objs Collection of object to turn into DTO. each Implements ToDTO
+     * @return Response
+     */
     private <A, T extends ToDTO<A>> Response createResponse(Response.StatusType status, Collection<T> objs){
         return Response.status(status)
                 .entity(objs.stream()
@@ -89,15 +106,30 @@ public abstract class AbstractController {
                 ).build();
     }
 
-    protected <T> Response ok(ToDTO<T> obj){
+    /**
+     * Creates an OK response & serialize object
+     * @param obj Object to serialize to DTO
+     * @return Response
+     */
+    protected <T> Response ok(ToDTO<? extends T> obj){
         return createResponse(Response.Status.OK, obj);
     }
 
+    /**
+     * Creates an OK response & serialize objects
+     * @param objs Collection of Objects to serialize to DTO
+     * @return Response
+     */
     protected <A, T extends ToDTO<A>> Response ok(Collection<T> objs){
         return createResponse(Response.Status.OK, objs);
     }
 
-
+    /**
+     * Create a response & serialize optional object to dto, adds status
+     * @param obj Optional object to turn into DTO
+     * @param status Response.Status
+     * @return Response
+     */
     protected <A, T extends ToDTO<A>> Response ifFound(Optional<T> obj, Response.Status status){
         if(obj.isEmpty()){
             return createResponse(Response.Status.NOT_FOUND);
@@ -105,18 +137,33 @@ public abstract class AbstractController {
         return createResponse(status, obj.get());
     }
 
+    /**
+     * Create an OK response & serialize optional object to dto
+     * @param obj Optional object to turn into DTO
+     * @return Response
+     */
     protected <A, T extends ToDTO<A>> Response ifFound(Optional<T> obj){
         return ifFound(obj, Response.Status.OK);
     }
 
-
-    protected <T, B extends ToDTO<T>, C extends Collection<B>> Response ifFoundCollection(Optional<C> obj, Response.Status status){
-        if(obj.isEmpty()){
+    /**
+     * Create a response & serialize optional collection of objects to dtos & adds status
+     * @param objs Optional objects to turn into DTOs
+     * @param status Response.Status
+     * @return Response
+     */
+    protected <T, B extends ToDTO<T>, C extends Collection<B>> Response ifFoundCollection(Optional<C> objs, Response.Status status){
+        if(objs.isEmpty()){
             return createResponse(Response.Status.NOT_FOUND);
         }
-        return createResponse(status, obj.get());
+        return createResponse(status, objs.get());
     }
 
+    /**
+     * Create an OK response & serialize optional collection of objects to dtos
+     * @param objs Optional objects to turn into DTOs
+     * @return Response
+     */
     protected <T, B extends ToDTO<T>, C extends Collection<B>> Response ifFoundCollection(Optional<C> objs){
         return ifFoundCollection(objs, Response.Status.OK);
     }

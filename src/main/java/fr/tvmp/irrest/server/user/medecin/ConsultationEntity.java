@@ -1,5 +1,6 @@
 package fr.tvmp.irrest.server.user.medecin;
 
+import fr.tvmp.irrest.common.dto.remboursement.ConsultationDTO;
 import fr.tvmp.irrest.server.CPAMException;
 import fr.tvmp.irrest.server.remboursement.ARemboursable;
 import fr.tvmp.irrest.server.user.patient.PatientEntity;
@@ -19,7 +20,7 @@ import java.util.UUID;
 @EqualsAndHashCode(callSuper = true)
 @JsonbPropertyOrder(PropertyOrderStrategy.LEXICOGRAPHICAL)
 @Table(name = "consultation")
-public class ConsultationEntity extends ARemboursable {
+public class ConsultationEntity extends ARemboursable<ConsultationDTO> {
 
     @JsonbTransient
     @ManyToOne(fetch = FetchType.EAGER, optional = false)
@@ -41,5 +42,10 @@ public class ConsultationEntity extends ARemboursable {
     @Override
     public Float getTauxCPAM() {
         return 0.70F;
+    }
+
+    @Override
+    public ConsultationDTO toDTO() {
+        return new ConsultationDTO(getPrix(), getTauxCPAM(), getRemboursement(), getMedecin().getId());
     }
 }

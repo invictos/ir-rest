@@ -20,7 +20,9 @@ Si non-utilisation de docker, alors possibilité d'utiliser h2 (inclut dans wild
 ```java
 //CPAMApplication.java
 //  Le serveur wildfly doit avoir un utilisateur admin:admin
-static private final String PERSISTANCE_UNIT_NAME = "devPU";
+class CPAMApplication{
+    static private final String PERSISTANCE_UNIT_NAME = "devPU";
+}
 ```
 
 

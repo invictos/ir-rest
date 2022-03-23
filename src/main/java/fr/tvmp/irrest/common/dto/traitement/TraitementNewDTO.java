@@ -10,5 +10,5 @@ import java.util.UUID;
 public class TraitementNewDTO {
     @NonNull UUID medecin;
     @NonNull UUID patient;
-    @NonNull List<DonneeDTO> donnees;
+    @NonNull List<DonneeMedicaleNewDTO> donnees;
 }

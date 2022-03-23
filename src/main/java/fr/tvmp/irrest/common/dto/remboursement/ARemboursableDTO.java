@@ -19,7 +19,7 @@ import org.codehaus.jackson.annotate.JsonTypeInfo;
         @JsonSubTypes.Type(name = "Medecin", value = MedecinDTO.class),
         @JsonSubTypes.Type(name = "Administratif", value = AdministratifDTO.class)
 })
-public class ARemboursableDTO {
+public abstract class ARemboursableDTO {
     @NonNull Float prix;
     @NonNull Float tauxCPAM;
     @NonNull Float remboursement;

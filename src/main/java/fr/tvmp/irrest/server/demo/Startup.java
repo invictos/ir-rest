@@ -6,7 +6,7 @@ import fr.tvmp.irrest.server.remboursement.RemboursementService;
 import fr.tvmp.irrest.server.traitement.TraitementEntity;
 import fr.tvmp.irrest.server.traitement.TraitementService;
 import fr.tvmp.irrest.server.traitement.donneemedicale.DonneeMedicaleEntity;
-import fr.tvmp.irrest.common.dto.traitement.DonneeType;
+import fr.tvmp.irrest.common.dto.traitement.DonneeMedicaleType;
 import fr.tvmp.irrest.server.user.UserService;
 import fr.tvmp.irrest.server.user.administratif.AdministratifEntity;
 import fr.tvmp.irrest.server.user.medecin.MedecinEntity;
@@ -112,8 +112,8 @@ public class Startup {
         traitement.setMedecin(medecin);
         traitement.setPatient(patient);
         traitement.setDonneesMedicales(Set.of(new DonneeMedicaleEntity[]{
-                new DonneeMedicaleEntity(traitement, DonneeType.NOTE, "NOTE 1"),
-                new DonneeMedicaleEntity(traitement, DonneeType.ORDONANCE, "ORDONNANCE 1")
+                new DonneeMedicaleEntity(traitement, DonneeMedicaleType.NOTE, "NOTE 1"),
+                new DonneeMedicaleEntity(traitement, DonneeMedicaleType.ORDONANCE, "ORDONNANCE 1")
         }));
         traitementService.addTraitement(traitement);
 

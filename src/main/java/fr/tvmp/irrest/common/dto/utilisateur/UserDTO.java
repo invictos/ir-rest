@@ -1,8 +1,6 @@
 package fr.tvmp.irrest.common.dto.utilisateur;
 
-import lombok.Data;
-import lombok.NoArgsConstructor;
-import lombok.NonNull;
+import lombok.*;
 import org.codehaus.jackson.annotate.JsonSubTypes;
 import org.codehaus.jackson.annotate.JsonTypeInfo;
 
@@ -11,6 +9,7 @@ import java.util.UUID;
 
 @Data
 @NoArgsConstructor
+@AllArgsConstructor
 @JsonTypeInfo(use = JsonTypeInfo.Id.NAME, property = "role")
 @JsonSubTypes({
         @JsonSubTypes.Type(name = "Patient", value = PatientDTO.class),

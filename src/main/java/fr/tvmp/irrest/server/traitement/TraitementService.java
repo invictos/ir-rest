@@ -1,6 +1,6 @@
 package fr.tvmp.irrest.server.traitement;
 
-import fr.tvmp.irrest.common.dto.traitement.DonneeNewDTO;
+import fr.tvmp.irrest.common.dto.traitement.DonneeMedicaleNewDTO;
 import fr.tvmp.irrest.server.common.AbstractService;
 import fr.tvmp.irrest.common.dto.traitement.TraitementNewDTO;
 import fr.tvmp.irrest.server.traitement.donneemedicale.DonneeMedicaleEntity;
@@ -48,7 +48,13 @@ public class TraitementService extends AbstractService {
         return Optional.ofNullable(traitementDAO.add(traitement));
     }
 
-    public Optional<DonneeMedicaleEntity> addDonneeToTraitement(@NonNull TraitementEntity traitement, @NonNull DonneeNewDTO donnee){
+    public Optional<DonneeMedicaleEntity> getDonneeOfTraitement(@NonNull TraitementEntity traitement, @NonNull UUID donnee_id){
+        return traitement.getDonneesMedicales().stream()
+                .filter(d -> d.getId() == donnee_id)
+                .findFirst();
+    }
+
+    public Optional<DonneeMedicaleEntity> addDonneeToTraitement(@NonNull TraitementEntity traitement, @NonNull DonneeMedicaleNewDTO donnee){
         DonneeMedicaleEntity dme = new DonneeMedicaleEntity(donnee, traitement);
         traitement.getDonneesMedicales().add(dme); //TODO: check if persist !!
         return Optional.of(dme);

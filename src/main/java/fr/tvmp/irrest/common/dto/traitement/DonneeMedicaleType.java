@@ -1,6 +1,6 @@
 package fr.tvmp.irrest.common.dto.traitement;
 
-public enum DonneeType {
+public enum DonneeMedicaleType {
     NOTE,
     ORDONANCE
 }

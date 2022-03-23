@@ -1,5 +1,7 @@
 package fr.tvmp.irrest.server.user.administratif;
 
+import fr.tvmp.irrest.common.dto.utilisateur.AdministratifDTO;
+import fr.tvmp.irrest.common.dto.utilisateur.UserDTO;
 import fr.tvmp.irrest.server.user.UserEntity;
 import fr.tvmp.irrest.server.user.UserRole;
 import lombok.*;
@@ -28,5 +30,10 @@ public class AdministratifEntity extends UserEntity {
     @Override
     public UserRole getRole() {
         return UserRole.ADMINISTRATIF;
+    }
+
+    @Override
+    public AdministratifDTO toDTO() {
+        return new AdministratifDTO(getId(), getPrenom(), getPrenom(), getEchelon());
     }
 }

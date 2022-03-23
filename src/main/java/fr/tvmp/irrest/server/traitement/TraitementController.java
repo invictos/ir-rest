@@ -1,12 +1,10 @@
 package fr.tvmp.irrest.server.traitement;
 
-import fr.tvmp.irrest.common.dto.traitement.DonneeNewDTO;
+import fr.tvmp.irrest.common.dto.traitement.DonneeMedicaleNewDTO;
 import fr.tvmp.irrest.server.auth.roles.Secured;
 import fr.tvmp.irrest.server.common.AbstractController;
 import fr.tvmp.irrest.common.dto.traitement.TraitementNewDTO;
-import fr.tvmp.irrest.server.traitement.donneemedicale.DonneeMedicaleEntity;
 import fr.tvmp.irrest.server.user.UserRole;
-import fr.tvmp.irrest.server.user.UserService;
 
 import javax.inject.Inject;
 import javax.validation.Valid;
@@ -48,25 +46,39 @@ public class TraitementController extends AbstractController {
     @Secured({UserRole.MEDECIN, UserRole.PATIENT})
     public Response getTraitement(@PathParam("traitement_id") UUID traitement_id){
         TraitementEntity traitement = traitementService.getTraitementByUUID(traitement_id)
+                .orElseThrow(ForbiddenException::new); //On cache le traitement avant l'authentification complète
+
+        authIsUUIDOrRole(traitement.getPatient().getId(), UserRole.MEDECIN); //Le médecin authentifié doit avoir préscrit le traitement
+
+        return ok(traitement);
+    }
+
+    @GET
+    @Path("{traitement_id}/donnees/{donnee_id}")
+    @Secured({UserRole.MEDECIN, UserRole.PATIENT})
+    public Response getDonneeMedicale(@PathParam("traitement_id") UUID traitement_id, @PathParam("donnee_id") UUID donnee_id){
+        TraitementEntity traitement = traitementService.getTraitementByUUID(traitement_id)
                 .orElseThrow(ForbiddenException::new);
 
         authIsUUIDOrRole(traitement.getPatient().getId(), UserRole.MEDECIN);
 
-        return ok(traitement);
+        return ifFound(
+                traitementService.getDonneeOfTraitement(traitement, donnee_id)
+        );
     }
 
     @POST
     @Path("/{traitement_id}/donnees")
     @Consumes(MediaType.APPLICATION_JSON)
     @Secured(UserRole.MEDECIN)
-    public Response addDonneToTraitement(@PathParam("traitement_id") UUID traitement_id, @Valid DonneeNewDTO donneeNewDTO){
+    public Response addDonneToTraitement(@PathParam("traitement_id") UUID traitement_id, @Valid DonneeMedicaleNewDTO donneeMedicaleNewDTO){
         TraitementEntity traitement = traitementService.getTraitementByUUID(traitement_id)
                         .orElseThrow(NotFoundException::new);
 
-        authIsUUID(traitement.getMedecin().getId()); //Le médecin doit avoir prescrit le traitement
+        authIsUUID(traitement.getMedecin().getId());
 
         return ifFound(
-                traitementService.addDonneeToTraitement(traitement, donneeNewDTO),
+                traitementService.addDonneeToTraitement(traitement, donneeMedicaleNewDTO),
                 Response.Status.CREATED
         );
     }
@@ -79,7 +91,7 @@ public class TraitementController extends AbstractController {
         TraitementEntity traitement = traitementService.getTraitementByUUID(traitement_id)
                 .orElseThrow(NotFoundException::new);
 
-        authIsUUID(traitement.getMedecin().getId()); //Le médecin doit avoir prescrit le traitement
+        authIsUUID(traitement.getMedecin().getId());
 
         traitementService.deleteDonneeOfTraitement(traitement, donnee_id);
 

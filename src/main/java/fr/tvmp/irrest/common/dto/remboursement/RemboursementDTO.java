@@ -11,5 +11,5 @@ public class RemboursementDTO {
     @NonNull UUID id;
     @NonNull UUID patient;
     @NonNull UUID medecin;
-    @NonNull List<ARemboursableDTO> remboursables;
+    @NonNull List<? extends ARemboursableDTO> remboursables;
 }

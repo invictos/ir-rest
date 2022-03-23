@@ -1,6 +1,7 @@
 package fr.tvmp.irrest.server.user.medecin;
 
 import fr.tvmp.irrest.common.Adresse;
+import fr.tvmp.irrest.common.dto.utilisateur.MedecinDTO;
 import fr.tvmp.irrest.common.dto.utilisateur.MedecinType;
 import fr.tvmp.irrest.server.user.UserEntity;
 import fr.tvmp.irrest.server.user.UserRole;
@@ -38,5 +39,10 @@ public class MedecinEntity extends UserEntity {
     @Override
     public UserRole getRole() {
         return UserRole.MEDECIN;
+    }
+
+    @Override
+    public MedecinDTO toDTO() {
+        return new MedecinDTO(getId(), getPrenom(), getPrenom(), getAdresse(), getType(), getSiret());
     }
 }

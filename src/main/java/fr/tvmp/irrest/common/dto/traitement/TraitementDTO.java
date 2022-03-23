@@ -11,5 +11,5 @@ public class TraitementDTO {
     @NonNull UUID id;
     @NonNull UUID medecin;
     @NonNull UUID patient;
-    @NonNull List<DonneeDTO> donnees;
+    @NonNull List<DonneeMedicaleDTO> donnees;
 }

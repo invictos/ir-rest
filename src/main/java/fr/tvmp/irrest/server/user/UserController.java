@@ -18,24 +18,22 @@ public class UserController extends AbstractController {
     UserService userService;
 
     @GET
-    @Path("allUsers")
+    @Path("all")
     public Response getAllUsers(){
         getLogger().info("Listed all users");
-        return Response.ok(
-                userService.getAllUsers().stream()
-                        .map(UserEntity::toUserSmall)
-                        .collect(Collectors.toList())
-        ).build();
+        return ok(
+                userService.getAllUsers()
+        );
     }
 
     @GET
     @Path("{id}")
-    @Secured({UserRole.PATIENT})
-    public UserEntity getByUUID(@PathParam("id") UUID id){
+    @Secured({UserRole.PATIENT, UserRole.ADMINISTRATIF, UserRole.MEDECIN})
+    public Response getByUUID(@PathParam("id") UUID id){
         authIsUUIDOrRole(id, UserRole.ADMINISTRATIF);
 
-        UserEntity user = userService.getUserByUUID(id).orElseThrow(NotFoundException::new);
-
-        return user;
+        return ifFound(
+                userService.getUserByUUID(id)
+        );
     }
 }
