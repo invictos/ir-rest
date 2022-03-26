@@ -1,11 +1,10 @@
 package fr.tvmp.irrest.common.dto.utilisateur;
 
+import com.fasterxml.jackson.annotation.JsonSubTypes;
+import com.fasterxml.jackson.annotation.JsonTypeInfo;
 import fr.tvmp.irrest.common.dto.CPAMDto;
 import lombok.*;
-import org.codehaus.jackson.annotate.JsonSubTypes;
-import org.codehaus.jackson.annotate.JsonTypeInfo;
 
-import javax.validation.constraints.NotNull;
 import java.util.UUID;
 
 @Data
@@ -19,7 +18,7 @@ import java.util.UUID;
 })
 public abstract class UserDTO implements CPAMDto {
     @NonNull private UUID id;
-    @NotNull private String prenom;
-    @NotNull private String nom;
+    @NonNull private String prenom;
+    @NonNull private String nom;
     @NonNull private UserRole role;
 }

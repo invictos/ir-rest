@@ -1,0 +1,37 @@
+POST {{baseUrl}}/auth
+Content-Type: application/json
+
+{
+  "uuid": "{{patientID}}",
+  "password": "1234"
+}
+
+<> 2022-03-25T194133.200.json
+<> 2022-03-25T192959.200.json
+<> 2022-03-25T190456.200.json
+
+###
+
+POST {{baseUrl}}/auth
+Content-Type: application/json
+
+{
+  "uuid": "{{medecinID}}",
+  "password": "1234"
+}
+
+<> 2022-03-25T190529.200.json
+<> 2022-03-25T190456.200.json
+
+###
+POST {{baseUrl}}/auth
+Content-Type: application/json
+
+{
+  "uuid": "{{cpamID}}",
+  "password": "1234"
+}
+
+<> 2022-03-25T200205.200.json
+###
+GET {{baseUrl}}/user/all

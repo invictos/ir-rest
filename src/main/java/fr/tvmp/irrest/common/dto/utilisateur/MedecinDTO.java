@@ -5,7 +5,6 @@ import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.NonNull;
 
-import javax.validation.constraints.NotNull;
 import java.util.UUID;
 
 @Data
@@ -17,7 +16,7 @@ public class MedecinDTO extends UserDTO{
 
     @NonNull private String siret;
 
-    public MedecinDTO(@NonNull UUID id, @NotNull String prenom, @NotNull String nom, @NonNull Adresse adresse, @NonNull MedecinType type, @NonNull String siret, @NonNull UserRole role) {
+    public MedecinDTO(@NonNull UUID id, @NonNull String prenom, @NonNull String nom, @NonNull Adresse adresse, @NonNull MedecinType type, @NonNull String siret, @NonNull UserRole role) {
         super(id, prenom, nom, role);
         this.adresse = adresse;
         this.type = type;

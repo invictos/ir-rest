@@ -1,0 +1,57 @@
+GET {{baseUrl}}/user/{{patientID}}
+Authorization: Bearer {{patientToken}}
+
+###
+GET {{baseUrl}}/patients/{{ssn}}
+Authorization: Bearer {{patientToken}}
+
+###
+GET {{baseUrl}}/patients/{{patientID}}/banque
+Authorization: Bearer {{patientToken}}
+
+###
+GET {{baseUrl}}/patients/{{patientID}}/adresse
+Authorization: Bearer {{patientToken}}
+
+
+###
+PUT {{baseUrl}}/patients/{{patientID}}/banque
+Authorization: Bearer {{patientToken}}
+Content-Type: application/json
+
+{
+  "iban": "FR1000000000000003"
+}
+
+###
+PUT {{baseUrl}}/patients/{{patientID}}/adresse
+Authorization: Bearer {{patientToken}}
+Content-Type: application/json
+
+{
+  "rue": "rue de Marseille",
+  "ville": "Marseille3"
+}
+
+###
+POST {{baseUrl}}/patients
+Authorization: Bearer {{cpamToken}}
+Content-Type: application/json
+
+{
+  "prenom": "test",
+  "nom": "nomTest",
+  "password": "1234",
+  "adresse": {
+    "rue": "rue du test",
+    "ville": "Geneve"
+  },
+  "nss": "123456789",
+  "banque": {
+    "iban": "FR010000001"
+  }
+}
+
+###
+GET {{baseUrl}}/user/0d8a59f9-9f46-49b7-ade2-9be668a6ed6c
+Authorization: Bearer {{cpamToken}}

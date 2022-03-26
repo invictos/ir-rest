@@ -1,5 +1,7 @@
 package fr.tvmp.irrest.common.dto.remboursement;
 
+import com.fasterxml.jackson.annotation.JsonSubTypes;
+import com.fasterxml.jackson.annotation.JsonTypeInfo;
 import fr.tvmp.irrest.common.dto.CPAMDto;
 import fr.tvmp.irrest.common.dto.utilisateur.AdministratifDTO;
 import fr.tvmp.irrest.common.dto.utilisateur.MedecinDTO;
@@ -8,8 +10,6 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 import lombok.NonNull;
 import lombok.RequiredArgsConstructor;
-import org.codehaus.jackson.annotate.JsonSubTypes;
-import org.codehaus.jackson.annotate.JsonTypeInfo;
 
 @Data
 @NoArgsConstructor

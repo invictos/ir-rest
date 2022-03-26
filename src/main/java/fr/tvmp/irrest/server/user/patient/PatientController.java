@@ -57,7 +57,8 @@ public class PatientController extends AbstractController {
 
         return Response.ok(
                 patientService.getPatientByUUID(patient_id)
-                        .map(PatientEntity::getBanque)
+                        .orElseThrow(NotFoundException::new)
+                        .getBanque()
         ).build();
     }
 
@@ -83,7 +84,8 @@ public class PatientController extends AbstractController {
 
         return Response.ok(
                 userService.getUserByUUID(patient_id, PatientEntity.class)
-                        .map(PatientEntity::getAdresse)
+                        .orElseThrow(NotFoundException::new)
+                        .getAdresse()
         ).build();
     }
 

@@ -10,6 +10,7 @@ import javax.ws.rs.*;
 import javax.ws.rs.core.Response;
 
 import java.util.UUID;
+import java.util.stream.Collectors;
 
 @Path("user")
 public class UserController extends AbstractController {
@@ -21,9 +22,11 @@ public class UserController extends AbstractController {
     @Path("all")
     public Response getAllUsers(){
         getLogger().info("Listed all users");
-        return ok(
-                userService.getAllUsers()
-        );
+        return Response.ok(
+                userService.getAllUsers().stream()
+                        .map(UserEntity::toPublic)
+                        .collect(Collectors.toList())
+        ).build();
     }
 
     @GET

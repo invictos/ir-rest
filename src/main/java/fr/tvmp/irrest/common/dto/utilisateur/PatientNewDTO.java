@@ -6,18 +6,19 @@ import fr.tvmp.irrest.common.dto.CPAMDto;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import lombok.NonNull;
 
-import javax.validation.constraints.NotNull;
 
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
 public class PatientNewDTO implements CPAMDto {
-    @NotNull private String prenom;
-    @NotNull private String nom;
-    @NotNull private String password;
+    @NonNull private String prenom;
+    @NonNull
+    private String nom;
+    @NonNull private String password;
 
-    @NotNull private Adresse adresse;
-    @NotNull private String nss;
-    @NotNull private Banque banque;
+    @NonNull private Adresse adresse;
+    @NonNull private String nss;
+    @NonNull private Banque banque;
 }

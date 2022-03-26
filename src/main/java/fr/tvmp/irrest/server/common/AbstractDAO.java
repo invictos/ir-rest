@@ -46,5 +46,14 @@ public abstract class AbstractDAO<T extends CPAMEntity> {
         return entity;
     }
 
+    @Transactional
+    public T update(@NonNull T entity) {
+        getEntityManager().getTransaction().begin();
+        getEntityManager().merge(entity);
+        getEntityManager().getTransaction().commit();
+        getLogger().info("Added: " + entity.getId() + " " + entity);
+        return entity;
+    }
+
     protected abstract Class<T> getEntityClass();
 }

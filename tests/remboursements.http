@@ -1,0 +1,10 @@
+GET {{baseUrl}}/remboursements/patient/{{patientID}}
+Authorization: Bearer {{patientToken}}
+
+###
+GET {{baseUrl}}/remboursements/a88e9f04-c2d8-4b6a-bd42-0f5be80e42e2
+Authorization: Bearer {{patientToken}}
+
+###
+POST {{baseUrl}}/remboursements/patient/{{patientID}}/consultation
+Authorization: Bearer {{medecinToken}}

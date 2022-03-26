@@ -1,5 +1,6 @@
 package fr.tvmp.irrest.server.user;
 
+import fr.tvmp.irrest.common.dto.utilisateur.UserPublicDTO;
 import fr.tvmp.irrest.common.dto.utilisateur.UserRole;
 import fr.tvmp.irrest.server.CPAMEntity;
 import fr.tvmp.irrest.server.common.ToDTO;
@@ -35,4 +36,8 @@ public abstract class UserEntity extends CPAMEntity implements Serializable, ToD
 
     @JsonbProperty("role")
     public abstract UserRole getRole();
+
+    public UserPublicDTO toPublic(){
+        return new UserPublicDTO(getId(), getPrenom(), getNom());
+    }
 }

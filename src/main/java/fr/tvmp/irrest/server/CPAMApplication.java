@@ -6,7 +6,6 @@ import lombok.NonNull;
 import javax.enterprise.inject.Produces;
 import javax.enterprise.inject.spi.InjectionPoint;
 import javax.persistence.EntityManager;
-import javax.persistence.EntityManagerFactory;
 import javax.persistence.Persistence;
 import javax.ws.rs.ApplicationPath;
 import javax.ws.rs.core.Application;
@@ -17,7 +16,7 @@ public class CPAMApplication extends Application {
 
     @Getter
     static private final String PERSISTANCE_UNIT_NAME = "prodPU"; // prodPU si postgresql, devPU si h2
-    static private final EntityManagerFactory emf = Persistence.createEntityManagerFactory(PERSISTANCE_UNIT_NAME);
+    static private EntityManager em = Persistence.createEntityManagerFactory(PERSISTANCE_UNIT_NAME).createEntityManager();
 
     /**
      * For logger injection. (for Controller & Service loggers, see AbstractController & ServiceController)
@@ -36,6 +35,6 @@ public class CPAMApplication extends Application {
      */
     @Produces
     public EntityManager getEntityManager(){
-        return emf.createEntityManager();
+        return em;
     }
 }
